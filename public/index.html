@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3ATogether - Plateforme d'Entraide</title>
+    <link href="output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Red Hat Text', sans-serif;
+        }
+
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C51718',
+                        'primary-75': 'rgba(197, 23, 24, 0.75)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="h-64 w-full bg-gradient-to-r from-[#C51718] to-black">
+
+    <nav class="bg-primary px-[30px] py-4">
+        <div class="grid grid-cols-12 gap-[30px] items-center">
+
+            <!-- Left: Logo (2 columns) -->
+            <div class="col-span-2">
+                <div class="flex items-center space-x-3">
+                    <img src="/src/assets/logo_1.png" alt="Logo" class="w-10 h-10 rounded-full">
+                    <div class="text-2xl font-medium text-white font-redhat">3ATogether</div>
+                </div>
+            </div>
+
+            <!-- Right: Search + User Menu (10 columns) -->
+            <div class="col-span-10">
+                <div class="flex items-center justify-between">
+
+                    <!-- Search Bar with Tags Dropdown -->
+                    <div class="relative w-3/5 min-w-[350px]">
+                        <div class="relative bg-white rounded-full shadow-lg border border-gray-200 p-1">
+                            <div class="flex items-center gap-2">
+                                <!-- Normal Search Input -->
+                                <div class="flex-1 flex items-center gap-2 pl-4">
+                                    <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                    <input type="text" placeholder="Rechercher un post..."
+                                        class="w-full py-2 text-sm outline-none" id="searchInput"
+                                        onkeypress="if(event.key === 'Enter') performSearch()">
+                                </div>
+
+                                <!-- Divider -->
+                                <div class="h-8 w-px bg-gray-300"></div>
+
+                                <!-- Tag Search Input -->
+                                <div class="flex-2  flex items-center gap-1 px-1">
+                                    <img src="/src/assets/icons/tags.png" alt="tag Icon" class="w-3 h-3">
+
+                                    <input type="text" placeholder="Tag..." class="w-10 py-1 text-sm outline-none"
+                                        id="tagInput" onkeypress="if(event.key === 'Enter') performSearch()"
+                                        onfocus="showTagSuggestions()" oninput="filterTagSuggestions()">
+                                </div>
+
+                                <!-- Search Button -->
+                                <button onclick="performSearch()"
+                                    class="group flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-brand-red mr-1">
+                                    <svg class="h-5 w-5 text-gray-600 transition-colors group-hover:text-white"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tag Suggestions Dropdown -->
+                        <div id="tagSuggestions"
+                            class="hidden absolute top-full right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 max-h-80 overflow-y-auto"
+                            style="width: 50%;">
+                            <div class="p-4">
+                                <div class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                                    <span>🔥</span> Tags populaires
+                                </div>
+                                <div id="tagList" class="space-y-2">
+                                    <div onclick="selectTag('JavaFX')"
+                                        class="px-4 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between group">
+                                        <span>JavaFX</span>
+                                        <span class="text-xs text-gray-400 group-hover:text-gray-600">156 posts</span>
+                                    </div>
+                                    <div onclick="selectTag('XAMPP')"
+                                        class="px-4 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between group">
+                                        <span>XAMPP</span>
+                                        <span class="text-xs text-gray-400 group-hover:text-gray-600">89 posts</span>
+                                    </div>
+                                    <div onclick="selectTag('Symfony')"
+                                        class="px-4 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between group">
+                                        <span>Symfony</span>
+                                        <span class="text-xs text-gray-400 group-hover:text-gray-600">124 posts</span>
+                                    </div>
+                                    <div onclick="selectTag('Git')"
+                                        class="px-4 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer text-sm flex items-center justify-between group">
+                                        <span>Git</span>
+                                        <span class="text-xs text-gray-400 group-hover:text-gray-600">145 posts</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Messagerie (Brand Red) -->
+                    <button class="bg-brand-red text-white px-6 py-2.5 rounded-full text-sm flex items-center gap-2 
+           hover:bg-brand-red/60 shadow transition-all duration-200 hover:shadow-lg">
+                        <img src="/src/assets/icons/001-chat.png" alt="Messagerie Icon" class="w-5 h-5">
+                        Messagerie
+                    </button>
+
+                    <!-- Calendrier -->
+                    <div class="bg-brand-red  rounded-full">
+                        <button class="bg-white text-brand-red px-6 py-2 rounded-full text-sm flex items-center gap-2
+           border-2 border-brand-red hover:bg-white/50 hover:text-white
+           transition-all duration-200 hover:shadow-lg">
+                            <img src="/src/assets/icons/calendar.png" alt="Calendrier Icon" class="w-5 h-5">
+                            Calendrier
+                        </button>
+                    </div>
+
+                    <!-- Bell & Arrow - Close Together -->
+                    <div class="flex items-center bg-transperent rounded-full backdrop-blur-sm  
+                        hover:bg-brand-red shadow transition-all duration-200 hover:shadow-lg">
+                        <button
+                            class="relative text-white hover:bg-primary-75 p-2 rounded-l-full flex items-center justify-center transition">
+                            <img src="/src/assets/icons/bell.png" alt="Notifications" class="w-6 h-6">
+                        </button>
+                        <button
+                            class="text-white hover:bg-primary-75 p-2 rounded-r-full flex items-center justify-center transition">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Profile -->
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full cursor-pointer flex items-center justify-center overflow-hidden ">
+                        <img src="/src/assets/icons/profile_img.png" alt="Profile" class="w-full h-full object-cover">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mx-auto px-[30px] py-[5px]">
+        <div class="grid grid-cols-12 gap-[20px]">
+
+            <!-- Left Sidebar (2 columns) -->
+            <aside class="col-span-2">
+                <div class="w-56 bg-white rounded-3xl shadow-lg p-2 pt-2 h-fit sticky top-6">
+                    <!-- Profile Section -->
+                    <div class="text-center mb-2 relative">
+                        <button class="absolute top-0 right-0 w-8 h-8 bg-white rounded-full flex items-center 
+                           justify-center hover:bg-gray-300 transition">
+                            <img src="/src/assets/icons/settings_red.png" alt="Messagerie Icon" class="w-5 h-5">
+                        </button>
+                        <div class="relative inline-block">
+                            <div class="w-20 h-20 bg-gradient-to-br from-teal-300 to-teal-400 rounded-full 
+                    mx-auto mb-1 overflow-hidden shadow-md">
+                                <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                                    class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="font-bold text-1xl text-brand-red font-poppins">Youssef</div>
+                        <div class="text-sm text-gray-500">Étudiant</div>
+                    </div>
+                    <hr class="w-20 border-t-5 border-gray-400 my-1 px-3 mx-auto">
+
+                    <!-- Navigation Menu -->
+                    <nav>
+                        <!-- Page d'accueil -->
+                        <a href="javascript:void(0)" onclick="loadPage('home')"
+                            class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-grey/30 transition text-gray-700 group">
+                            <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0
+            group-hover:bg-brand-red transition-colors">
+                                <img src="/src/assets/icons/home.png" alt="Home Icon" class="w-4 h-4">
+                            </div>
+                            <span class="text-sm font-medium">Page d'accueil</span>
+                        </a>
+
+                        <!-- Les étiquettes -->
+                        <a href="javascript:void(0)" onclick="loadPage('tags')"
+                            class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-grey/30 transition text-gray-700 group">
+                            <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0
+            group-hover:bg-brand-red transition-colors">
+                                <img src="/src/assets/icons/price-tag 1.png" alt="Tags Icon" class="w-4 h-4">
+                            </div>
+                            <span class="text-sm font-medium">Les étiquettes</span>
+                        </a>
+
+                        <!-- FAQ -->
+                        <a href="#"
+                            class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-grey/30 transition text-gray-700 group">
+                            <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0
+            group-hover:bg-brand-red transition-colors">
+                                <img src="/src/assets/icons/faq.png" alt="FAQ Icon" class="w-4 h-4">
+                            </div>
+                            <span class="text-sm font-medium">FAQ</span>
+                        </a>
+
+                        <!-- Mon réseau & dropdown -->
+                        <div>
+                            <button onclick="toggleDropdown('reseau')"
+                                class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-grey/30 transition text-gray-700 group">
+                                <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0
+                group-hover:bg-brand-red transition-colors">
+                                    <img src="/src/assets/icons/networking.png" alt="Networking Icon" class="w-4 h-4">
+                                </div>
+                                <span class="text-sm font-medium">Mon réseau</span>
+                                <svg id="reseau-arrow" class="w-4 h-4 ml-auto text-primary transition-transform"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div id="reseau-dropdown" class="hidden pl-12 pr-4 space-y-1">
+                                <a href="#"
+                                    class="block py-2 text-sm text-gray-600 hover:text-brand-red transition">Ajouter un
+                                    ami</a>
+                                <a href="#"
+                                    class="block py-2 text-sm text-gray-600 hover:text-brand-red transition">Liste
+                                    d'amis</a>
+                            </div>
+                        </div>
+
+                        <!-- Réunions & dropdown -->
+                        <div>
+                            <button onclick="toggleDropdown('reunion')"
+                                class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-grey/30 transition text-gray-700 group">
+                                <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0
+                group-hover:bg-brand-red transition-colors">
+                                    <img src="/src/assets/icons/reunion.png" alt="Reunion Icon" class="w-4 h-4">
+                                </div>
+                                <span class="text-sm font-medium">Réunions</span>
+                                <svg id="reunion-arrow" class="w-4 h-4 ml-auto text-primary transition-transform"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div id="reunion-dropdown" class="hidden pl-12 pr-4 space-y-1">
+                                <a href="#"
+                                    class="block py-2 text-sm text-gray-600 hover:text-brand-red transition">Créer une
+                                    nouvelle réunion</a>
+                                <a href="#"
+                                    class="block py-2 text-sm text-gray-600 hover:text-brand-red transition">Voir
+                                    réunion</a>
+                            </div>
+                        </div>
+
+                        <!-- Ressources & dropdown -->
+                        <div>
+                            <button onclick="toggleDropdown('ressource')"
+                                class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-grey/30 transition text-gray-700 group">
+                                <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0
+                group-hover:bg-brand-red transition-colors">
+                                    <img src="/src/assets/icons/document 1.png" alt="Resources Icon" class="w-4 h-4">
+                                </div>
+                                <span class="text-sm font-medium">Ressources</span>
+                                <svg id="ressource-arrow" class="w-4 h-4 ml-auto text-primary transition-transform"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div id="ressource-dropdown" class="hidden pl-12 pr-4 space-y-1">
+                                <a href="#"
+                                    class="block py-2 text-sm text-gray-600 hover:text-brand-red transition">Symfony</a>
+                                <a href="#"
+                                    class="block py-2 text-sm text-gray-600 hover:text-brand-red transition">JavaFX</a>
+
+                            </div>
+                        </div>
+
+                        <a href="javascript:void(0)" onclick="loadPage('profile')"
+                            class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-brand-grey/30 transition text-gray-700 group">
+                            <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0
+            group-hover:bg-brand-red transition-colors">
+                                <img src="/src/assets/icons/profile.png" alt="Profile Icon" class="w-4 h-4">
+                            </div>
+                            <span class="text-sm font-medium">Profile</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Bottom Section -->
+                <div class="mt-1 pt-1 flex  items-center gap-3">
+                    <!-- Contact Us Button -->
+                    <div class="w-80">
+                        <button class="w-full bg-white text-brand-red px-4 py-2 rounded-2xl text-sm flex items-center gap-2
+   border-2 border-brand-red hover:bg-white/50 hover:text-white
+   transition-all duration-200 hover:shadow-lg">
+                            <div class=" w-8 h-8 bg-white border-2 border-brand-red rounded-full flex items-center
+                justify-center">
+                                <img src="/src/assets/icons/email (1).png" alt="Contact Icon" class="w-4 h-4">
+                            </div>
+                            Contact
+                        </button>
+                    </div>
+
+                    <!-- Logout Button -->
+                    <div>
+                        <button class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center 
+                  hover:bg-brand-red/40 hover:shadow-lg transition">
+                            <img src="/src/assets/icons/logout.png" alt="Logout" class="w-6 h-6">
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="col-span-10 bg-white rounded-lg space-y-6" id="content-container">
+                <!-- Content loads here automatically -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Include the external JavaScript file -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
