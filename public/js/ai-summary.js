@@ -16,6 +16,7 @@ const aiResponses = [
 
 let responseIndex = 0;
 let messageCount = 1; // Start with 1 for the initial message
+let chatExpanded = false; // Track if chat is expanded
 
 // Feedback buttons
 function handleFeedback(isPositive) {
@@ -48,9 +49,6 @@ function sendMessage() {
     // Clear input
     input.value = '';
     messageCount++;
-    
-    // Expand chat area
-    expandChatArea();
     
     // Simulate AI response after a short delay
     setTimeout(() => {
@@ -85,15 +83,12 @@ function getAIResponse() {
     return response;
 }
 
-function expandChatArea() {
-    const chatMessages = document.getElementById('chatMessages');
+function expandChat() {
+    if (chatExpanded) return; // Already expanded
     
-    // Expand chat area based on message count
-    if (messageCount >= 3 && messageCount < 6) {
-        chatMessages.style.maxHeight = '200px';
-    } else if (messageCount >= 6) {
-        chatMessages.style.maxHeight = '320px';
-    }
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.style.height = '240px'; // 2x the original 120px
+    chatExpanded = true;
 }
 
 function escapeHtml(text) {
@@ -122,5 +117,3 @@ document.addEventListener('click', function(e) {
         alert('Fonctionnalité "Voir Plus" - à implémenter avec plus de liens');
     }
 });
-
-
