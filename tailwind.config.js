@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         redhat: ['"Red Hat"', 'sans-serif'],
+        poppins: ['"Poppins"', 'sans-serif'],
       },
       colors: {
         'brand-red': '#C51718',

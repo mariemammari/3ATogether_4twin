@@ -1,19 +1,133 @@
-<!-- This is the SCROLLABLE area -->
+<!-- HEADER (fixed) -->
+<header class="h-24 bg-brand-red text-white px-6 flex flex-col justify-center flex-none sticky top-0 z-50">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold">Home</h1>
+            <p class="text-sm text-white/80 -mt-1">Welcome to the community</p>
+        </div>
 
-    <!-- Content loads here automatically -->
-
-    <!-- DEMO CONTENT (Remove this and load your actual content) -->
-    <div class="space-y-4">
-        <h1 class="text-2xl font-bold">Scrollable Content Area</h1>
-        <p>This area scrolls while navbar and sidebar remain fixed.</p>
-
-        <!-- Add more content to test scrolling -->
-        <div class="bg-gray-100 p-4 rounded">Sample Post 1</div>
-        <div class="bg-gray-100 p-4 rounded">Sample Post 2</div>
-        <div class="bg-gray-100 p-4 rounded">Sample Post 3</div>
-        <div class="bg-gray-100 p-4 rounded">Sample Post 4</div>
-        <div class="bg-gray-100 p-4 rounded">Sample Post 5</div>
-        <div class="bg-gray-100 p-4 rounded">Sample Post 6</div>
-        <div class="bg-gray-100 p-4 rounded">Sample Post 7</div>
-        <div class="bg-gray-100 p-4 rounded">Sample Post 8</div>
+        <div class="flex items-center gap-3">
+            <button class="px-4 py-2 bg-white text-brand-red font-medium rounded-lg">
+                Sort by Latest
+            </button>
+            <button class="px-4 py-2 bg-white text-brand-red font-medium rounded-lg">
+                Sort by Popular
+            </button>
+            <button class="px-4 py-2 bg-black text-white font-medium rounded-lg">
+                Add a Post
+            </button>
+        </div>
     </div>
+</header>
+
+<!-- PAGE LAYOUT -->
+<div class="flex flex-1 overflow-hidden">
+
+
+    <!-- MAIN CONTENT (scrollable) -->
+    <main class="flex-1 overflow-y-auto p-6 bg-gray-50 space-y-4">
+
+        <!-- POST 1 -->
+        <article class="bg-white rounded-xl shadow-sm p-4 border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                <div>
+                    <h4 class="font-semibold">John Doe</h4>
+                    <p class="text-xs text-gray-500">2 hours ago</p>
+                </div>
+            </div>
+            <p class="text-gray-800 mb-3">
+                Just finished my new UI design with Tailwind. Loving how flexible it is!
+            </p>
+
+            <div class="flex gap-2 mb-3">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs">#UI</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs">#Tailwind</span>
+            </div>
+
+            <div class="flex gap-4 text-sm text-gray-600">
+                <button class="hover:text-brand-red">❤️ Like</button>
+                <button class="hover:text-brand-red">💬 Comment</button>
+            </div>
+        </article>
+
+        <!-- POST 2 -->
+        <article class="bg-white rounded-xl shadow-sm p-4 border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                <div>
+                    <h4 class="font-semibold">Alice Smith</h4>
+                    <p class="text-xs text-gray-500">5 hours ago</p>
+                </div>
+            </div>
+            <p class="text-gray-800 mb-3">
+                Anyone has tips for learning React faster? I’ve been stuck on useEffect.
+            </p>
+
+            <div class="flex gap-2 mb-3">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs">#React</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs">#Help</span>
+            </div>
+
+            <div class="flex gap-4 text-sm text-gray-600">
+                <button class="hover:text-brand-red">❤️ Like</button>
+                <button class="hover:text-brand-red">💬 Comment</button>
+            </div>
+        </article>
+
+        <!-- POST 3 -->
+        <article class="bg-white rounded-xl shadow-sm p-4 border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                <div>
+                    <h4 class="font-semibold">Mourad</h4>
+                    <p class="text-xs text-gray-500">1 day ago</p>
+                </div>
+            </div>
+            <p class="text-gray-800 mb-3">
+                Today I learned how to make scrollable layouts with Tailwind. Life-changing!
+            </p>
+
+            <div class="flex gap-2 mb-3">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs">#CSS</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs">#Frontend</span>
+            </div>
+
+            <div class="flex gap-4 text-sm text-gray-600">
+                <button class="hover:text-brand-red">❤️ Like</button>
+                <button class="hover:text-brand-red">💬 Comment</button>
+            </div>
+        </article>
+
+    </main>
+
+
+
+    <!-- RIGHT SIDEBAR (fixed, scrollable separately) -->
+    <aside class="w-72 bg-white border-l p-4 space-y-6 overflow-y-auto flex-none sticky top-24 h-[calc(100vh-96px)]">
+
+        <!-- Most Popular Tags -->
+        <div class="border rounded-xl p-4">
+            <h3 class="font-semibold text-lg mb-3">Most Popular Tags</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">#AI</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">#Design</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">#React</span>
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">#Tailwind</span>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="border rounded-xl p-4">
+            <h3 class="font-semibold text-lg mb-3">FAQ</h3>
+            <ul class="space-y-2 text-sm">
+                <li>• How to post?</li>
+                <li>• How does sorting work?</li>
+                <li>• How to report a problem?</li>
+                <li>• Contact support</li>
+            </ul>
+        </div>
+
+    </aside>
+
+</div>
