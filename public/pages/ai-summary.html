@@ -11,7 +11,8 @@
                 extend: {
                     colors: {
                         'brand-red': '#DC3545',
-                        'brand-red-75': '#E56471'
+                        'brand-red-75': '#E56471',
+                        'brand-darkRed': '#C82333'
                     }
                 }
             }
@@ -19,258 +20,419 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- AI Summary Post View -->
-    <div class="max-w-7xl mx-auto p-6">
-        <!-- Back Button -->
-        <button onclick="alert('Navigation vers la page d\'accueil')" class="mb-6 text-gray-600 hover:text-brand-red flex items-center gap-2 transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-            <span class="font-medium">Retour</span>
-        </button>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <!-- Main Content Area (Left) -->
-            <div class="lg:col-span-8 space-y-6">
-                <!-- Header with AI Badge -->
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                        <img src="/src/assets/icons/ai.png" alt="AI Icon" class="w-6 h-6">
+<!-- Top Bar with Back and Save buttons -->
+<div class="px-4 pt-4 relative flex items-center">
+    <!-- Back Button -->
+    <button onclick="alert('Navigation vers la page d\'accueil')" class="hover:opacity-75 transition-opacity">
+        <img src="/src/assets/icons/backarrow.png" alt="Back" class="w-8 h-8">
+    </button>
+
+    <!-- Spacer to push Save button close to the card -->
+    <div class="flex-1"></div>
+
+    <!-- Save Button -->
+    <button 
+        onclick="showSavePopup()" 
+        class="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:opacity-75 transition-opacity shadow-md"
+        style="margin-right: 1rem;">
+        <img src="/src/assets/icons/saveai.png" alt="Save" class="w-5 h-5">
+    </button>
+</div>
+<!-- Save Confirmation Popup -->
+<div id="savePopup" class="hidden" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; display: none; align-items: center; justify-content: center;">
+    
+    <!-- Backdrop (Dark overlay) -->
+    <div onclick="closeSavePopup()" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(2px);"></div>
+
+    <!-- Popup Card -->
+    <div class="bg-white" style="position: relative; background-color: white; width: 100%; max-width: 400px; border-radius: 30px; padding: 2rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); margin: 0 1rem;">
+        
+        <!-- Close Button (Top Right) -->
+        <button onclick="closeSavePopup()" style="position: absolute; top: 20px; right: 20px; cursor: pointer; background: transparent; border: none;">
+            <img src="/src/assets/icons/cross.png" alt="Close" style="width: 16px; height: 16px; opacity: 0.6;">
+        </button>
+        
+        <!-- Green Check Icon (Centered) -->
+        <div style="margin-top: 10px; margin-bottom: 20px;">
+            <img src="/src/assets/icons/greencheck.png" alt="Success" style="width: 80px; height: 80px; object-fit: contain;">
+        </div>
+        
+        <!-- Message -->
+        <p style="color: #1a1a1a; font-weight: bold; font-size: 1.125rem; text-align: center; margin-bottom: 30px; font-family: inherit;">
+            Le résumé est enregistré dans vos notes
+        </p>
+        
+        <!-- Buttons Container -->
+        <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+            <!-- Annuler Button (Transparent with Red Border, Pill Shape) -->
+            <button 
+                onclick="closeSavePopup()" 
+                style="flex: 1; padding: 12px 20px; font-weight: bold; border: 2px solid #C51718; color: #C51718; background-color: transparent; border-radius: 9999px; cursor: pointer; transition: background 0.2s;">
+                Annuler
+            </button>
+            
+            <!-- Voir Button (Red Background, White Text, 15px Radius) -->
+            <button 
+                onclick="alert('Voir les notes')" 
+                style="flex: 1; padding: 12px 20px; font-weight: bold; border: none; color: white; background-color: #C51718; border-radius: 15px; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                Voir
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- PAGE LAYOUT matching home -->
+    <div class="flex flex-1 bg-transparent px-4">
+        <!-- Main content -->
+        <main class="flex-1 max-w-3xl overflow-y-auto px-1">
+            <!-- Header with AI Badge - No card -->
+            <div class="flex items-center gap-3 mb-3 mt-2">
+                <div class="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                    <img src="/src/assets/icons/ai.png" alt="AI Icon" class="w-6 h-6">
+                </div>
+                <h1 class="text-2xl font-bold text-gray-900">Résumé du post par l'IA</h1>
+            </div>
+
+            <!-- Post Title - No card -->
+            <div class="flex items-start gap-3 mb-6">
+                <h2 class="text-3xl font-bold text-gray-900 flex-1">JavaFx failed connection to database</h2>
+                <button class="text-brand-red hover:text-brand-red-75 p-2 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Problem Section -->
+            <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/probleme.png" alt="Problem Icon" class="w-6 h-6">
                     </div>
-                    <h1 class="text-2xl font-bold text-gray-900">Résumé du post par l'IA</h1>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Problème</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            L'application JavaFX ne parvient pas à établir une connexion avec la base de données MySQL. Le message d'erreur indique un problème de timeout lors de la tentative de connexion, empêchant l'application de récupérer ou d'enregistrer des données.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Cause Section -->
+            <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/cause.png" alt="Cause Icon" class="w-6 h-6">
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Cause</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            La cause principale est souvent liée aux paramètres de connexion incorrects, au serveur MySQL non démarré, ou à un pare-feu bloquant le port 3306. Il peut également s'agir d'un problème avec le driver JDBC MySQL manquant ou mal configuré dans le projet.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Solution Section -->
+            <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/solution.png" alt="Solution Icon" class="w-6 h-6">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                            <h3 class="text-xl font-bold text-gray-900">Solution</h3>
+                            <span class="bg-green-500 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 font-medium">
+                                <img src="/src/assets/icons/verified.png" alt="Verified" class="w-4 h-4">
+                                Solution vérifiée
+                            </span>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">
+                            Vérifiez d'abord que MySQL est démarré. Ensuite, assurez-vous que le driver JDBC MySQL est bien ajouté aux dépendances de votre projet. Vérifiez l'URL de connexion (jdbc:mysql://localhost:3306/votre_base), le nom d'utilisateur et le mot de passe. Si le problème persiste, vérifiez que le port 3306 n'est pas bloqué par le pare-feu et que MySQL accepte les connexions externes. Ajoutez également les paramètres de timezone si nécessaire: ?serverTimezone=UTC dans l'URL de connexion.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Tutorial Suggestions from YouTube -->
+            <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+                <div class="flex items-start gap-4 mb-4">
+                    <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/camera.png" alt="Camera Icon" class="w-6 h-6">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-2">Suggestions de tutoriels YouTube</h3>
                 </div>
 
-                <!-- Post Title -->
-                <div class="flex items-start gap-3">
-                    <h2 class="text-3xl font-bold text-gray-900 flex-1">JavaFx failed connection to database</h2>
-                    <button class="text-brand-red hover:text-brand-red-75 p-2 transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                <!-- Video Suggestions List -->
+                <div class="space-y-3">
+                    <!-- Video Item 1 -->
+                    <div class="flex items-center gap-3 p-3 border-2 border-brand-red rounded-2xl hover:bg-gray-50 transition-colors">
+                        <img src="/src/assets/icons/youtube.png" alt="YouTube" class="w-10 h-10 flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-brand-red font-bold text-sm mb-1">Video Title</h4>
+                            <div class="flex items-center gap-2 text-xs text-gray-600">
+                                <img src="/src/assets/icons/user.png" alt="Channel" class="w-3 h-3">
+                                <span>channel name</span>
+                                <span class="ml-2">15mn</span>
+                            </div>
+                        </div>
+                        <button onclick="alert('Ouvrir la vidéo YouTube')" class="flex items-center gap-2 text-sm text-gray-700 hover:text-brand-red transition-colors flex-shrink-0">
+                            <span class="font-medium">Watch now</span>
+                            <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center">
+                                <img src="/src/assets/icons/arrow.png" alt="Arrow" class="w-4 h-4">
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Video Item 2 -->
+                    <div class="flex items-center gap-3 p-3 border-2 border-brand-red rounded-2xl hover:bg-gray-50 transition-colors">
+                        <img src="/src/assets/icons/youtube.png" alt="YouTube" class="w-10 h-10 flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-brand-red font-bold text-sm mb-1">Video Title</h4>
+                            <div class="flex items-center gap-2 text-xs text-gray-600">
+                                <img src="/src/assets/icons/user.png" alt="Channel" class="w-3 h-3">
+                                <span>channel name</span>
+                                <span class="ml-2">15mn</span>
+                            </div>
+                        </div>
+                        <button onclick="alert('Ouvrir la vidéo YouTube')" class="flex items-center gap-2 text-sm text-gray-700 hover:text-brand-red transition-colors flex-shrink-0">
+                            <span class="font-medium">Watch now</span>
+                            <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center">
+                                <img src="/src/assets/icons/arrow.png" alt="Arrow" class="w-4 h-4">
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Video Item 3 -->
+                    <div class="flex items-center gap-3 p-3 border-2 border-brand-red rounded-2xl hover:bg-gray-50 transition-colors">
+                        <img src="/src/assets/icons/youtube.png" alt="YouTube" class="w-10 h-10 flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-brand-red font-bold text-sm mb-1">Video Title</h4>
+                            <div class="flex items-center gap-2 text-xs text-gray-600">
+                                <img src="/src/assets/icons/user.png" alt="Channel" class="w-3 h-3">
+                                <span>channel name</span>
+                                <span class="ml-2">15mn</span>
+                            </div>
+                        </div>
+                        <button onclick="alert('Ouvrir la vidéo YouTube')" class="flex items-center gap-2 text-sm text-gray-700 hover:text-brand-red transition-colors flex-shrink-0">
+                            <span class="font-medium">Watch now</span>
+                            <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center">
+                                <img src="/src/assets/icons/arrow.png" alt="Arrow" class="w-4 h-4">
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <!-- Right sidebar matching home -->
+        <aside class="w-96 bg-white p-4 space-y-2 flex-none">
+            <!-- Difficulty Card -->
+            <div class="bg-brand-red rounded-2xl p-5 text-white shadow-lg">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                            <img src="/src/assets/icons/difficulte.png" alt="Difficulty Icon" class="w-3 h-3">
+                        </div>
+                        <span class="font-semibold">Niveau de difficulté</span>
+                    </div>
+                    <div class="bg-white text-brand-red px-3 py-1 rounded-lg text-sm font-bold shadow-sm">
+                        Difficile
+                    </div>
+                </div>
+
+                <div class="mt-4 flex items-center gap-2">
+                    <img src="/src/assets/icons/temps.png" alt="Time Icon" class="w-5 h-5">
+                    <span class="font-semibold">Temps estimé</span>
+                </div>
+                <div class="text-lg font-bold mt-1">15mn</div>
+
+                <div class="mt-4 flex items-center gap-2">
+                    <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/popularite.png" alt="Popularity Icon" class="w-3 h-3">
+                    </div>
+                    <span class="font-semibold">Popularité</span>
+                </div>
+            </div>
+
+            <!-- Feedback Card -->
+            <div class="bg-brand-red rounded-2xl p-5 text-white shadow-lg">
+                <h3 class="font-bold text-lg mb-3">Ça a fonctionné?</h3>
+                <div class="flex gap-3">
+                    <button onclick="handleFeedback(true)" class="flex-1 bg-white text-brand-red rounded-lg py-2.5 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 font-semibold shadow-sm">
+                        <img src="/src/assets/icons/thumb.png" alt="Thumbs Up" class="w-6 h-6">
+                        Oui
+                    </button>
+                    <button onclick="handleFeedback(false)" class="flex-1 bg-white text-brand-red rounded-lg py-2.5 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 font-semibold shadow-sm">
+                        <img src="/src/assets/icons/thumb-down.png" alt="Thumbs Down" class="w-6 h-6">
+                        Non
+                    </button>
+                </div>
+            </div>
+
+            <!-- Learn More Card -->
+            <div class="border border-brand-red/50 rounded-xl p-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-6 h-6 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/savoir.png" alt="Learn More Icon" class="w-4 h-4">
+                    </div>
+                    <h3 class="font-bold text-brand-red text-lg">En savoir plus</h3>
+                </div>
+                <div class="space-y-2">
+                    <a href="#" class="block text-brand-red hover:underline text-sm break-all">docs.oracle.com/javafx/database-tutorial</a>
+                    <a href="#" class="block text-brand-red hover:underline text-sm break-all">mysql.com/connector-java-documentation</a>
+                    <div class="text-right">
+                        <button onclick="alert('Afficher plus de liens')" class="text-brand-red hover:underline text-sm font-semibold mt-2">Voir Plus</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat with AI Card -->
+            <div class="border border-brand-red/50 rounded-xl p-4">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-6 h-6 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/discuter.png" alt="Chat Icon" class="w-4 h-4">
+                    </div>
+                    <h3 class="font-bold text-brand-red text-lg">Discuter avec l'IA</h3>
+                </div>
+                
+                <!-- Chat Messages -->
+                <div id="chatMessages" class="space-y-3 mb-4 overflow-y-auto transition-all duration-300" style="height: 120px;">
+                    <!-- AI Initial Message -->
+                    <div class="bg-gray-100 rounded-2xl p-3">
+                        <p class="text-sm text-gray-700">Heureux de vous guider à travers votre solution!</p>
+                    </div>
+                </div>
+                
+                <!-- Chat Input -->
+                <div class="flex gap-2 items-center bg-brand-red rounded-full p-1">
+                    <button onclick="alert('Fonction audio à venir')" class="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
+                        <img src="/src/assets/icons/mic.png" alt="Microphone" class="w-6 h-6">
+                    </button>
+                    <input id="chatInput" type="text" placeholder="Posez une question..." 
+                           onclick="expandChat()" onfocus="expandChat()"
+                           onkeypress="if(event.key === 'Enter') sendMessage()"
+                           class="flex-1 px-4 py-2 bg-white rounded-full text-gray-900 text-sm placeholder-gray-500 focus:outline-none transition-colors">
+                    <button onclick="sendMessage()" class="w-12 h-12 bg-white text-brand-red rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
                         </svg>
                     </button>
                 </div>
-
-                <!-- Problem Section -->
-                <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                            <img src="/src/assets/icons/probleme.png" alt="Problem Icon" class="w-6 h-6">
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">Problème</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                L'application JavaFX ne parvient pas à établir une connexion avec la base de données MySQL. Le message d'erreur indique un problème de timeout lors de la tentative de connexion, empêchant l'application de récupérer ou d'enregistrer des données.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cause Section -->
-                <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                            <img src="/src/assets/icons/cause.png" alt="Cause Icon" class="w-6 h-6">
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">Cause</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                La cause principale est souvent liée aux paramètres de connexion incorrects, au serveur MySQL non démarré, ou à un pare-feu bloquant le port 3306. Il peut également s'agir d'un problème avec le driver JDBC MySQL manquant ou mal configuré dans le projet.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Solution Section -->
-                <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                            <img src="/src/assets/icons/solution.png" alt="Solution Icon" class="w-6 h-6">
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-                                <h3 class="text-xl font-bold text-gray-900">Solution</h3>
-                                <span class="bg-green-500 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 font-medium">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                    </svg>
-                                    Solution vérifiée
-                                </span>
-                            </div>
-                            <p class="text-gray-700 leading-relaxed">
-                                Vérifiez d'abord que MySQL est démarré. Ensuite, assurez-vous que le driver JDBC MySQL est bien ajouté aux dépendances de votre projet. Vérifiez l'URL de connexion (jdbc:mysql://localhost:3306/votre_base), le nom d'utilisateur et le mot de passe. Si le problème persiste, vérifiez que le port 3306 n'est pas bloqué par le pare-feu et que MySQL accepte les connexions externes. Ajoutez également les paramètres de timezone si nécessaire: ?serverTimezone=UTC dans l'URL de connexion.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tutorial Suggestions from YouTube -->
-                <div class="bg-white border-2 border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-start gap-4 mb-4">
-                        <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                            <img src="/src/assets/icons/camera.png" alt="Camera Icon" class="w-6 h-6">
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-2">Suggestions de tutoriels YouTube</h3>
-                    </div>
-
-                    <!-- Video Suggestions List -->
-                    <div class="space-y-3">
-                        <!-- Video Item 1 -->
-                        <div class="flex items-center gap-3 p-3 border-2 border-brand-red rounded-2xl hover:bg-gray-50 transition-colors">
-                            <img src="/src/assets/icons/youtube.png" alt="YouTube" class="w-10 h-10 flex-shrink-0">
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-brand-red font-bold text-sm mb-1">Video Title</h4>
-                                <div class="flex items-center gap-2 text-xs text-gray-600">
-                                    <img src="/src/assets/icons/user.png" alt="Channel" class="w-3 h-3">
-                                    <span>channel name</span>
-                                    <span class="ml-2">15mn</span>
-                                </div>
-                            </div>
-                            <button onclick="alert('Ouvrir la vidéo YouTube')" class="flex items-center gap-2 text-sm text-gray-700 hover:text-brand-red transition-colors flex-shrink-0">
-                                <span class="font-medium">Watch now</span>
-                                <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center">
-                                    <img src="/src/assets/icons/arrow.png" alt="Arrow" class="w-4 h-4">
-                                </div>
-                            </button>
-                        </div>
-
-                        <!-- Video Item 2 -->
-                        <div class="flex items-center gap-3 p-3 border-2 border-brand-red rounded-2xl hover:bg-gray-50 transition-colors">
-                            <img src="/src/assets/icons/youtube.png" alt="YouTube" class="w-10 h-10 flex-shrink-0">
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-brand-red font-bold text-sm mb-1">Video Title</h4>
-                                <div class="flex items-center gap-2 text-xs text-gray-600">
-                                    <img src="/src/assets/icons/user.png" alt="Channel" class="w-3 h-3">
-                                    <span>channel name</span>
-                                    <span class="ml-2">15mn</span>
-                                </div>
-                            </div>
-                            <button onclick="alert('Ouvrir la vidéo YouTube')" class="flex items-center gap-2 text-sm text-gray-700 hover:text-brand-red transition-colors flex-shrink-0">
-                                <span class="font-medium">Watch now</span>
-                                <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center">
-                                    <img src="/src/assets/icons/arrow.png" alt="Arrow" class="w-4 h-4">
-                                </div>
-                            </button>
-                        </div>
-
-                        <!-- Video Item 3 -->
-                        <div class="flex items-center gap-3 p-3 border-2 border-brand-red rounded-2xl hover:bg-gray-50 transition-colors">
-                            <img src="/src/assets/icons/youtube.png" alt="YouTube" class="w-10 h-10 flex-shrink-0">
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-brand-red font-bold text-sm mb-1">Video Title</h4>
-                                <div class="flex items-center gap-2 text-xs text-gray-600">
-                                    <img src="/src/assets/icons/user.png" alt="Channel" class="w-3 h-3">
-                                    <span>channel name</span>
-                                    <span class="ml-2">15mn</span>
-                                </div>
-                            </div>
-                            <button onclick="alert('Ouvrir la vidéo YouTube')" class="flex items-center gap-2 text-sm text-gray-700 hover:text-brand-red transition-colors flex-shrink-0">
-                                <span class="font-medium">Watch now</span>
-                                <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center">
-                                    <img src="/src/assets/icons/arrow.png" alt="Arrow" class="w-4 h-4">
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-            <!-- Right Sidebar -->
-            <div class="lg:col-span-4 space-y-4">
-                <!-- Difficulty Card -->
-                <div class="bg-brand-red rounded-2xl p-5 text-white shadow-lg">
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center gap-2">
-                            <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                                <img src="/src/assets/icons/difficulte.png" alt="Difficulty Icon" class="w-3 h-3">
-                            </div>
-                            <span class="font-semibold">Niveau de difficulté</span>
-                        </div>
-                        <div class="bg-white text-brand-red px-3 py-1 rounded-lg text-sm font-bold shadow-sm">
-                            Difficile
-                        </div>
-                    </div>
-
-                    <div class="mt-4 flex items-center gap-2">
-                        <img src="/src/assets/icons/temps.png" alt="Time Icon" class="w-5 h-5">
-                        <span class="font-semibold">Temps estimé</span>
-                    </div>
-                    <div class="text-lg font-bold mt-1">15mn</div>
-
-                    <div class="mt-4 flex items-center gap-2">
-                        <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                            <img src="/src/assets/icons/popularite.png" alt="Popularity Icon" class="w-3 h-3">
-                        </div>
-                        <span class="font-semibold">Popularité</span>
-                    </div>
-                </div>
-
-                <!-- Feedback Card -->
-                <div class="bg-brand-red rounded-2xl p-5 text-white shadow-lg">
-                    <h3 class="font-bold text-lg mb-3">Ça a fonctionné?</h3>
-                    <div class="flex gap-3">
-                        <button onclick="handleFeedback(true)" class="flex-1 bg-white text-brand-red rounded-lg py-2.5 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 font-semibold shadow-sm">
-                            <img src="/src/assets/icons/thumb.png" alt="Thumbs Up" class="w-6 h-6">
-                            Oui
-                        </button>
-                        <button onclick="handleFeedback(false)" class="flex-1 bg-white text-brand-red rounded-lg py-2.5 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 font-semibold shadow-sm">
-                            <img src="/src/assets/icons/thumb-down.png" alt="Thumbs Down" class="w-6 h-6">
-                            Non
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Learn More Card -->
-                <div class="bg-white border-2 border-brand-red rounded-2xl p-5 shadow-sm">
-                    <div class="flex items-center gap-2 mb-3">
-                        <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                            <img src="/src/assets/icons/savoir.png" alt="Learn More Icon" class="w-5 h-5">
-                        </div>
-                        <h3 class="font-bold text-gray-900">En savoir plus</h3>
-                    </div>
-                    <div class="space-y-2">
-                        <a href="#" class="block text-brand-red hover:underline text-sm break-all">docs.oracle.com/javafx/database-tutorial</a>
-                        <a href="#" class="block text-brand-red hover:underline text-sm break-all">mysql.com/connector-java-documentation</a>
-                        <div class="text-right">
-                            <button onclick="alert('Afficher plus de liens')" class="text-brand-red hover:underline text-sm font-semibold mt-2">Voir Plus</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chat with AI Card -->
-                <div class="bg-white border-2 border-brand-red rounded-2xl p-5 shadow-sm">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                            <img src="/src/assets/icons/discuter.png" alt="Chat Icon" class="w-5 h-5">
-                        </div>
-                        <h3 class="font-bold text-gray-900">Discuter avec l'IA</h3>
-                    </div>
-                    
-                    <!-- Chat Messages -->
-                    <div id="chatMessages" class="space-y-3 mb-4 overflow-y-auto transition-all duration-300" style="height: 120px;">
-                        <!-- AI Initial Message -->
-                        <div class="bg-gray-100 rounded-2xl p-3">
-                            <p class="text-sm text-gray-700">Heureux de vous guider à travers votre solution!</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Chat Input -->
-                    <div class="flex gap-2 items-center bg-brand-red rounded-full p-1">
-                        <button onclick="alert('Fonction audio à venir')" class="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
-                            <img src="/src/assets/icons/mic.png" alt="Microphone" class="w-6 h-6">
-                        </button>
-                        <input id="chatInput" type="text" placeholder="Posez une question..." 
-                               onclick="expandChat()" onfocus="expandChat()"
-                               onkeypress="if(event.key === 'Enter') sendMessage()"
-                               class="flex-1 px-4 py-2 bg-white rounded-full text-gray-900 text-sm placeholder-gray-500 focus:outline-none transition-colors">
-                        <button onclick="sendMessage()" class="w-12 h-12 bg-white text-brand-red rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </aside>
     </div>
+
+    <script>
+        // AI Summary Page Interactions
+
+        // Static AI responses pool
+        const aiResponses = [
+            "Excellente question! Pour ce problème, je vous recommande de vérifier d'abord votre configuration.",
+            "Je comprends votre préoccupation. Avez-vous essayé de redémarrer le serveur MySQL?",
+            "C'est un problème courant. Assurez-vous que votre driver JDBC est à jour.",
+            "Intéressant! Cette erreur est souvent liée aux permissions de la base de données.",
+            "Bon point! N'oubliez pas de vérifier le port 3306 dans votre pare-feu.",
+            "Je vois. Avez-vous vérifié que l'URL de connexion est correcte?",
+            "C'est une bonne observation. Le timeout peut être causé par plusieurs facteurs.",
+            "Merci de partager cela. Avez-vous testé la connexion avec un client SQL?",
+            "Ah oui, ce problème nécessite de vérifier les logs MySQL pour plus de détails.",
+            "Bonne approche! Assurez-vous aussi que le nom d'utilisateur et le mot de passe sont corrects."
+        ];
+
+        let responseIndex = 0;
+        let messageCount = 1;
+        let chatExpanded = false;
+
+        // Feedback buttons
+        function handleFeedback(isPositive) {
+            const message = isPositive 
+                ? 'Merci pour votre retour positif! 👍' 
+                : 'Nous sommes désolés que cela n\'ait pas fonctionné. Voulez-vous discuter avec l\'IA pour plus d\'aide? 💬';
+            
+            alert(message);
+            console.log('Feedback:', isPositive ? 'positive' : 'negative');
+            
+            if (!isPositive) {
+                document.getElementById('chatInput')?.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Chat functionality
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addMessageToChat(message, 'user');
+            input.value = '';
+            messageCount++;
+            
+            setTimeout(() => {
+                const aiResponse = getAIResponse();
+                addMessageToChat(aiResponse, 'ai');
+                messageCount++;
+            }, 800);
+        }
+
+        function addMessageToChat(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                messageDiv.className = 'bg-brand-red text-white rounded-2xl p-3 ml-8';
+                messageDiv.innerHTML = `<p class="text-sm">${escapeHtml(message)}</p>`;
+            } else {
+                messageDiv.className = 'bg-gray-100 rounded-2xl p-3 mr-8';
+                messageDiv.innerHTML = `<p class="text-sm text-gray-700">${escapeHtml(message)}</p>`;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getAIResponse() {
+            const response = aiResponses[responseIndex];
+            responseIndex = (responseIndex + 1) % aiResponses.length;
+            return response;
+        }
+
+        function expandChat() {
+            if (chatExpanded) return;
+            
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.style.height = '240px';
+            chatExpanded = true;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Handle Enter key in chat input
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) {
+                chatInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+        });
+
+        // Save popup functions
+        function showSavePopup() {
+            document.getElementById('savePopup').classList.remove('hidden');
+        }
+
+        function closeSavePopup() {
+            document.getElementById('savePopup').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>

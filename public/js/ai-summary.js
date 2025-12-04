@@ -117,3 +117,15 @@ document.addEventListener('click', function(e) {
         alert('Fonctionnalité "Voir Plus" - à implémenter avec plus de liens');
     }
 });
+
+function showSavePopup() {
+    const popup = document.getElementById('savePopup');
+    popup.classList.remove('hidden');
+    popup.style.display = 'flex'; // Force flex to center it
+}
+
+function closeSavePopup() {
+    const popup = document.getElementById('savePopup');
+    popup.classList.add('hidden');
+    popup.style.display = 'none';
+}
