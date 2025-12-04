@@ -4,27 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Résumé IA - JavaFx Database Connection</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-red': '#DC3545',
-                        'brand-red-75': '#E56471',
-                        'brand-darkRed': '#C82333'
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="/output.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50">
 
 <!-- Top Bar with Back and Save buttons -->
-<div class="px-4 pt-4 relative flex items-center">
+<div class="px-4 pt-1 pb-2 relative flex items-center">
     <!-- Back Button -->
-    <button onclick="alert('Navigation vers la page d\'accueil')" class="hover:opacity-75 transition-opacity">
+    <button onclick="alert('Navigation vers la page d\'accueil')" class="w-10 h-10 flex items-center justify-center hover:opacity-75 transition-opacity">
         <img src="/src/assets/icons/backarrow.png" alt="Back" class="w-8 h-8">
     </button>
 
@@ -35,8 +22,8 @@
     <button 
         onclick="showSavePopup()" 
         class="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:opacity-75 transition-opacity shadow-md"
-        style="margin-right: 1rem;">
-        <img src="/src/assets/icons/saveai.png" alt="Save" class="w-5 h-5">
+        style="margin-right: 1rem; border: 2px solid rgba(197, 23, 24, 0.75);">
+        <img src="/src/assets/icons/saveai.png" alt="Save" class="w-6 h-6">
     </button>
 </div>
 <!-- Save Confirmation Popup -->
@@ -68,14 +55,14 @@
             <!-- Annuler Button (Transparent with Red Border, Pill Shape) -->
             <button 
                 onclick="closeSavePopup()" 
-                style="flex: 1; padding: 12px 20px; font-weight: bold; border: 2px solid #C51718; color: #C51718; background-color: transparent; border-radius: 9999px; cursor: pointer; transition: background 0.2s;">
+                class="flex-1 py-3 px-5 border-2 border-brand-red text-brand-red bg-transparent rounded-full font-bold hover:bg-brand-red hover:text-white transition-all cursor-pointer">
                 Annuler
             </button>
             
             <!-- Voir Button (Red Background, White Text, 15px Radius) -->
             <button 
                 onclick="alert('Voir les notes')" 
-                style="flex: 1; padding: 12px 20px; font-weight: bold; border: none; color: white; background-color: #C51718; border-radius: 15px; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                class="flex-1 py-3 px-5 bg-brand-red text-white rounded-[15px] font-bold hover:bg-brand-darkRed transition-colors cursor-pointer shadow-md">
                 Voir
             </button>
         </div>
@@ -87,7 +74,7 @@
         <!-- Main content -->
         <main class="flex-1 max-w-3xl overflow-y-auto px-1">
             <!-- Header with AI Badge - No card -->
-            <div class="flex items-center gap-3 mb-3 mt-2">
+            <div class="flex items-center gap-3 mb-3 mt-0">
                 <div class="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
                     <img src="/src/assets/icons/ai.png" alt="AI Icon" class="w-6 h-6">
                 </div>
@@ -229,36 +216,38 @@
         <!-- Right sidebar matching home -->
         <aside class="w-96 bg-white p-4 space-y-2 flex-none">
             <!-- Difficulty Card -->
-            <div class="bg-brand-red rounded-2xl p-5 text-white shadow-lg">
+            <div class="bg-brand-red-75 rounded-2xl p-5 text-white shadow-lg" style="background-color: rgba(197, 23, 24, 0.75) !important;">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
-                        <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                            <img src="/src/assets/icons/difficulte.png" alt="Difficulty Icon" class="w-3 h-3">
+                        <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                            <img src="/src/assets/icons/difficulte.png" alt="Difficulty Icon" class="w-4 h-4">
                         </div>
-                        <span class="font-semibold">Niveau de difficulté</span>
+                        <span class="font-poppins font-semibold text-[26px]">Niveau de difficulté</span>
                     </div>
                     <div class="bg-white text-brand-red px-3 py-1 rounded-lg text-sm font-bold shadow-sm">
                         Difficile
                     </div>
                 </div>
 
-                <div class="mt-4 flex items-center gap-2">
-                    <img src="/src/assets/icons/temps.png" alt="Time Icon" class="w-5 h-5">
-                    <span class="font-semibold">Temps estimé</span>
+                <div class="mt-4 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <img src="/src/assets/icons/temps.png" alt="Time Icon" class="w-7 h-7">
+                        <span class="font-semibold text-[20px]">Temps estimé</span>
+                    </div>
+                    <div class="text-[20px] font-bold">15mn</div>
                 </div>
-                <div class="text-lg font-bold mt-1">15mn</div>
 
                 <div class="mt-4 flex items-center gap-2">
-                    <div class="w-5 h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                        <img src="/src/assets/icons/popularite.png" alt="Popularity Icon" class="w-3 h-3">
+                    <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/popularite.png" alt="Popularity Icon" class="w-4 h-4">
                     </div>
-                    <span class="font-semibold">Popularité</span>
+                    <span class="font-semibold text-[20px]">Popularité</span>
                 </div>
             </div>
 
             <!-- Feedback Card -->
             <div class="bg-brand-red rounded-2xl p-5 text-white shadow-lg">
-                <h3 class="font-bold text-lg mb-3">Ça a fonctionné?</h3>
+                <h3 class="font-bold text-[24px] mb-3">Ça a fonctionné?</h3>
                 <div class="flex gap-3">
                     <button onclick="handleFeedback(true)" class="flex-1 bg-white text-brand-red rounded-lg py-2.5 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 font-semibold shadow-sm">
                         <img src="/src/assets/icons/thumb.png" alt="Thumbs Up" class="w-6 h-6">
@@ -272,167 +261,54 @@
             </div>
 
             <!-- Learn More Card -->
-            <div class="border border-brand-red/50 rounded-xl p-4">
+            <div class="border border-brand-red/50 rounded-xl p-4 bg-white">
                 <div class="flex items-center gap-2 mb-3">
-                    <div class="w-6 h-6 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                        <img src="/src/assets/icons/savoir.png" alt="Learn More Icon" class="w-4 h-4">
+                    <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/savoir.png" alt="Learn More Icon" class="w-5 h-5">
                     </div>
-                    <h3 class="font-bold text-brand-red text-lg">En savoir plus</h3>
+                    <h3 class="font-bold font-poppins text-black text-[25px]">En savoir plus</h3>
                 </div>
                 <div class="space-y-2">
-                    <a href="#" class="block text-brand-red hover:underline text-sm break-all">docs.oracle.com/javafx/database-tutorial</a>
-                    <a href="#" class="block text-brand-red hover:underline text-sm break-all">mysql.com/connector-java-documentation</a>
+                    <a href="#" class="block text-black underline text-sm break-all">docs.oracle.com/javafx/database-tutorial</a>
+                    <a href="#" class="block text-black underline text-sm break-all">mysql.com/connector-java-documentation</a>
                     <div class="text-right">
-                        <button onclick="alert('Afficher plus de liens')" class="text-brand-red hover:underline text-sm font-semibold mt-2">Voir Plus</button>
+                        <button onclick="alert('Afficher plus de liens')" class="text-brand-red underline text-sm font-semibold mt-2">Voir Plus</button>
                     </div>
                 </div>
             </div>
-
             <!-- Chat with AI Card -->
-            <div class="border border-brand-red/50 rounded-xl p-4">
-                <div class="flex items-center gap-2 mb-4">
-                    <div class="w-6 h-6 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                        <img src="/src/assets/icons/discuter.png" alt="Chat Icon" class="w-4 h-4">
+            <div class="border border-brand-red/50 rounded-xl overflow-hidden bg-white">
+                <!-- Header -->
+                <div class="flex items-center gap-2 p-4 pb-3">
+                    <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/discuter.png" alt="Chat Icon" class="w-5 h-5">
                     </div>
-                    <h3 class="font-bold text-brand-red text-lg">Discuter avec l'IA</h3>
+                    <h3 class="font-bold font-poppins text-black text-[30px]">Discuter avec l'IA</h3>
                 </div>
                 
                 <!-- Chat Messages -->
-                <div id="chatMessages" class="space-y-3 mb-4 overflow-y-auto transition-all duration-300" style="height: 120px;">
+                <div id="chatMessages" class="space-y-3 px-4 pb-4 overflow-y-auto transition-all duration-300" style="height: 120px;">
                     <!-- AI Initial Message -->
                     <div class="bg-gray-100 rounded-2xl p-3">
                         <p class="text-sm text-gray-700">Heureux de vous guider à travers votre solution!</p>
                     </div>
                 </div>
                 
-                <!-- Chat Input -->
-                <div class="flex gap-2 items-center bg-brand-red rounded-full p-1">
-                    <button onclick="alert('Fonction audio à venir')" class="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
-                        <img src="/src/assets/icons/mic.png" alt="Microphone" class="w-6 h-6">
+                <!-- Chat Input - Full Width Red Background -->
+                <div class="bg-brand-red p-2 flex items-center gap-2">
+                    <button onclick="alert('Fonction audio à venir')" class="w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
+                        <img src="/src/assets/icons/mic.png" alt="Microphone" class="w-4 h-4">
                     </button>
                     <input id="chatInput" type="text" placeholder="Posez une question..." 
                            onclick="expandChat()" onfocus="expandChat()"
                            onkeypress="if(event.key === 'Enter') sendMessage()"
-                           class="flex-1 px-4 py-2 bg-white rounded-full text-gray-900 text-sm placeholder-gray-500 focus:outline-none transition-colors">
-                    <button onclick="sendMessage()" class="w-12 h-12 bg-white text-brand-red rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors flex-shrink-0">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                        </svg>
+                           class="flex-1 px-3 py-1.5 bg-white rounded-lg text-gray-900 text-sm placeholder-gray-500 focus:outline-none transition-colors border-none">
+                    <button onclick="sendMessage()" class="text-white flex items-center justify-center hover:opacity-80 transition-opacity flex-shrink-0">
+                        <img src="/src/assets/icons/arrow.png" alt="Send" class="w-5 h-5">
                     </button>
                 </div>
             </div>
-        </aside>
-    </div>
 
-    <script>
-        // AI Summary Page Interactions
-
-        // Static AI responses pool
-        const aiResponses = [
-            "Excellente question! Pour ce problème, je vous recommande de vérifier d'abord votre configuration.",
-            "Je comprends votre préoccupation. Avez-vous essayé de redémarrer le serveur MySQL?",
-            "C'est un problème courant. Assurez-vous que votre driver JDBC est à jour.",
-            "Intéressant! Cette erreur est souvent liée aux permissions de la base de données.",
-            "Bon point! N'oubliez pas de vérifier le port 3306 dans votre pare-feu.",
-            "Je vois. Avez-vous vérifié que l'URL de connexion est correcte?",
-            "C'est une bonne observation. Le timeout peut être causé par plusieurs facteurs.",
-            "Merci de partager cela. Avez-vous testé la connexion avec un client SQL?",
-            "Ah oui, ce problème nécessite de vérifier les logs MySQL pour plus de détails.",
-            "Bonne approche! Assurez-vous aussi que le nom d'utilisateur et le mot de passe sont corrects."
-        ];
-
-        let responseIndex = 0;
-        let messageCount = 1;
-        let chatExpanded = false;
-
-        // Feedback buttons
-        function handleFeedback(isPositive) {
-            const message = isPositive 
-                ? 'Merci pour votre retour positif! 👍' 
-                : 'Nous sommes désolés que cela n\'ait pas fonctionné. Voulez-vous discuter avec l\'IA pour plus d\'aide? 💬';
-            
-            alert(message);
-            console.log('Feedback:', isPositive ? 'positive' : 'negative');
-            
-            if (!isPositive) {
-                document.getElementById('chatInput')?.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Chat functionality
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            addMessageToChat(message, 'user');
-            input.value = '';
-            messageCount++;
-            
-            setTimeout(() => {
-                const aiResponse = getAIResponse();
-                addMessageToChat(aiResponse, 'ai');
-                messageCount++;
-            }, 800);
-        }
-
-        function addMessageToChat(message, sender) {
-            const chatMessages = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            
-            if (sender === 'user') {
-                messageDiv.className = 'bg-brand-red text-white rounded-2xl p-3 ml-8';
-                messageDiv.innerHTML = `<p class="text-sm">${escapeHtml(message)}</p>`;
-            } else {
-                messageDiv.className = 'bg-gray-100 rounded-2xl p-3 mr-8';
-                messageDiv.innerHTML = `<p class="text-sm text-gray-700">${escapeHtml(message)}</p>`;
-            }
-            
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function getAIResponse() {
-            const response = aiResponses[responseIndex];
-            responseIndex = (responseIndex + 1) % aiResponses.length;
-            return response;
-        }
-
-        function expandChat() {
-            if (chatExpanded) return;
-            
-            const chatMessages = document.getElementById('chatMessages');
-            chatMessages.style.height = '240px';
-            chatExpanded = true;
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Handle Enter key in chat input
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatInput = document.getElementById('chatInput');
-            if (chatInput) {
-                chatInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        sendMessage();
-                    }
-                });
-            }
-        });
-
-        // Save popup functions
-        function showSavePopup() {
-            document.getElementById('savePopup').classList.remove('hidden');
-        }
-
-        function closeSavePopup() {
-            document.getElementById('savePopup').classList.add('hidden');
-        }
-    </script>
+    <script src="/js/ai-summary.js"></script>
 </body>
 </html>
