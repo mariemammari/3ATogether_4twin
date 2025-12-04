@@ -1,0 +1,610 @@
+<header class="bg-white text-white flex-none  top-0 z-50 py-2 px-4">
+    <div class="flex items-start justify-between">
+        <!-- Left: Logo, greeting, subtitle, sorting -->
+        <div class="flex flex-col gap-2">
+            <!-- Title with icon -->
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0 hover:bg-brand-red transition-colors">
+                    <img src="/src/assets/icons/success.png" alt="Home Icon" class="w-4 h-4">
+                </div>
+                <h1 class="text-black text-3xl font-poppins">Bonjour, Youssef!</h1>
+            </div>
+
+            <!-- Subtitle -->
+            <p class="text-sm ml-10 text-black">
+                Simplifiez vos Projets Intégrés avec des solutions fiables et l'aide de vos camarades.
+            </p>
+
+            <!-- Sorting buttons -->
+            <div class="flex items-left gap-3">
+                <!-- Trier par dropdown -->
+                <div class="relative">
+                    <button id="sortButton"
+                        class="flex items-center justify-between px-3 py-1 border border-brand-red text-brand-red text-sm rounded-full hover:border-brand-red/50 transition-colors">
+                        <span id="sortText">trier par</span>
+                        <img src="/src/assets/icons/arrow_down_red.png" alt="Arrow" class="mx-2 w-2 h-2 rounded-full">
+                    </button>
+                    <div id="sortDropdown"
+                        class="hidden absolute top-full mt-2 w-40 bg-white border border-brand-red rounded-xl shadow-lg overflow-hidden z-50">
+                        <button
+                            class="sort-option w-full px-4 py-2 text-left text-sm text-black hover:bg-brand-red hover:text-white transition-colors"
+                            data-value="Most Popular">Most Popular</button>
+                        <button
+                            class="sort-option w-full px-4 py-2 text-left text-sm text-black hover:bg-brand-red hover:text-white transition-colors"
+                            data-value="Most Recent">Most Recent</button>
+                        <button
+                            class="sort-option w-full px-4 py-2 text-left text-sm text-black hover:bg-brand-red hover:text-white transition-colors"
+                            data-value="Top">Top</button>
+                    </div>
+                </div>
+
+                <!-- Type post dropdown -->
+                <div class="relative">
+                    <button id="typeButton"
+                        class="flex items-center justify-between px-3 py-1 border border-brand-red text-brand-red text-sm rounded-full hover:border-brand-red/50 transition-colors">
+                        <span id="typeText">type post</span>
+                        <img src="/src/assets/icons/arrow_down_red.png" alt="Arrow" class="mx-2 w-2 h-2 rounded-full">
+                    </button>
+                    <div id="typeDropdown"
+                        class="hidden absolute top-full mt-2 w-40 bg-white border border-brand-red rounded-xl shadow-lg overflow-hidden z-50">
+                        <button
+                            class="type-option w-full px-4 py-2 text-left text-sm text-black hover:bg-brand-red hover:text-white transition-colors"
+                            data-value="All">All</button>
+                        <button
+                            class="type-option w-full px-4 py-2 text-left text-sm text-black hover:bg-brand-red hover:text-white transition-colors"
+                            data-value="Solution">Solution</button>
+                        <button
+                            class="type-option w-full px-4 py-2 text-left text-sm text-black hover:bg-brand-red hover:text-white transition-colors"
+                            data-value="Question">Question</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Add Post button -->
+        <div class="fixed top-15 right-10 flex justify-center items-center z-50">
+            <!-- Red circle with plus -->
+            <div
+                class="absolute -left-5 w-16 h-16 bg-brand-red rounded-full flex items-center  hover:bg-brand-darkRed justify-center z-50 shadow-lg">
+                <img src="/src/assets/icons/add.png" alt="Add" class="w-8 h-8">
+            </div>
+
+            <!-- Button -->
+            <button class="pl-20 pr-10 py-2  bg-white border-2 border-red-600 rounded-full 
+                   hover:bg-brand-darkRed hover:text-white  hover:border-brand-darkRed transition-colors text-red-600 font-medium">
+                Publier
+            </button>
+        </div>
+
+    </div>
+</header>
+
+<!-- PAGE LAYOUT -->
+<div class="flex flex-1 bg-transparent px-4">
+    <!-- Main content -->
+    <main class="flex-1 overflow-y-auto px-1">
+        <!-- Post example -->
+        <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Kamel Touati</h4>
+                        <p class="text-xs text-gray-500">2 hours ago</p>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-3 py-1 text-white text-sm rounded-full bg-brand-red hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/add_friend.png" alt="Add friend" class="w-4 h-4">
+                        Suivre
+                    </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-7 h-7 bg-brand-red text-white rounded-full flex items-center justify-center hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/save.png" alt="Save" class="w-5 h-5">
+                    </button>
+                    <button
+                        class="w-7 h-7 text-gray-700 rounded-full flex items-center justify-center bg-white border border-brand-red hover:border-brand-red/50 transition-colors">
+                        <img src="/src/assets/icons/dots_red.png" alt="More" class="w-5 h-5">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-3">
+                <div class="flex-1">
+                    <h1 class="text-black font-redhat text-2xl mb-1">Runtime components are missing</h1>
+                    <p class="text-black font-poppins line-clamp-3">
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!
+                    </p>
+                </div>
+                <div class="w-25 h-25 bg-gray-200 border border-gray-400 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="/src/assets/icons/post_image.png" alt="Post Image" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Post footer: interactions + tag -->
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2 text-sm text-gray-600">
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/downvote.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/repost_red.png" alt="Repost" class="w-4 h-4">
+                        </button>
+                        2
+                    </div>
+                </div>
+                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-700">#JavaFx</span>
+            </div>
+        </article>
+        <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Kamel Touati</h4>
+                        <p class="text-xs text-gray-500">2 hours ago</p>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-3 py-1 text-white text-sm rounded-full bg-brand-red hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/add_friend.png" alt="Add friend" class="w-4 h-4">
+                        Suivre
+                    </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-7 h-7 bg-brand-red text-white rounded-full flex items-center justify-center hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/save.png" alt="Save" class="w-5 h-5">
+                    </button>
+                    <button
+                        class="w-7 h-7 text-gray-700 rounded-full flex items-center justify-center bg-white border border-brand-red hover:border-brand-red/50 transition-colors">
+                        <img src="/src/assets/icons/dots_red.png" alt="More" class="w-5 h-5">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-3">
+                <div class="flex-1">
+                    <h1 class="text-black font-redhat text-2xl mb-1">Runtime components are missing</h1>
+                    <p class="text-black font-poppins line-clamp-3">
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!This error keeps popping whenever I try to run. Would you please try to help me? I'm
+                        running out
+                        of time!This error keeps popping whenever I try to run. Would you please try to help me? I'm
+                        running out
+                        of time!
+                    </p>
+                </div>
+                <div class="w-25 h-25 bg-gray-200 border border-gray-400 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="/src/assets/icons/post_image.png" alt="Post Image" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Post footer: interactions + tag -->
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2 text-sm text-gray-600">
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/downvote.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/repost_red.png" alt="Repost" class="w-4 h-4">
+                        </button>
+                        2
+                    </div>
+                </div>
+                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-700">#JavaFx</span>
+            </div>
+        </article>
+        <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Kamel Touati</h4>
+                        <p class="text-xs text-gray-500">2 hours ago</p>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-3 py-1 text-white text-sm rounded-full bg-brand-red hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/add_friend.png" alt="Add friend" class="w-4 h-4">
+                        Suivre
+                    </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-7 h-7 bg-brand-red text-white rounded-full flex items-center justify-center hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/save.png" alt="Save" class="w-5 h-5">
+                    </button>
+                    <button
+                        class="w-7 h-7 text-gray-700 rounded-full flex items-center justify-center bg-white border border-brand-red hover:border-brand-red/50 transition-colors">
+                        <img src="/src/assets/icons/dots_red.png" alt="More" class="w-5 h-5">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-3">
+                <div class="flex-1">
+                    <h1 class="text-black font-redhat text-2xl mb-1">Runtime components are missing</h1>
+                    <p class="text-black font-poppins line-clamp-3">
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!
+                    </p>
+                </div>
+                <div class="w-25 h-25 bg-gray-200 border border-gray-400 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="/src/assets/icons/post_image.png" alt="Post Image" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Post footer: interactions + tag -->
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2 text-sm text-gray-600">
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/downvote.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/repost_red.png" alt="Repost" class="w-4 h-4">
+                        </button>
+                        2
+                    </div>
+                </div>
+                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-700">#JavaFx</span>
+            </div>
+        </article>
+        <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Kamel Touati</h4>
+                        <p class="text-xs text-gray-500">2 hours ago</p>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-3 py-1 text-white text-sm rounded-full bg-brand-red hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/add_friend.png" alt="Add friend" class="w-4 h-4">
+                        Suivre
+                    </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-7 h-7 bg-brand-red text-white rounded-full flex items-center justify-center hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/save.png" alt="Save" class="w-5 h-5">
+                    </button>
+                    <button
+                        class="w-7 h-7 text-gray-700 rounded-full flex items-center justify-center bg-white border border-brand-red hover:border-brand-red/50 transition-colors">
+                        <img src="/src/assets/icons/dots_red.png" alt="More" class="w-5 h-5">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-3">
+                <div class="flex-1">
+                    <h1 class="text-black font-redhat text-2xl mb-1">Runtime components are missing</h1>
+                    <p class="text-black font-poppins line-clamp-3">
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!This error keeps popping whenever I try to run. Would you please try to help me? I'm
+                        running out
+                        of time!This error keeps popping whenever I try to run. Would you please try to help me? I'm
+                        running out
+                        of time!
+                    </p>
+                </div>
+                <div class="w-25 h-25 bg-gray-200 border border-gray-400 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="/src/assets/icons/post_image.png" alt="Post Image" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Post footer: interactions + tag -->
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2 text-sm text-gray-600">
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/downvote.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/repost_red.png" alt="Repost" class="w-4 h-4">
+                        </button>
+                        2
+                    </div>
+                </div>
+                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-700">#JavaFx</span>
+            </div>
+        </article>
+        <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Kamel Touati</h4>
+                        <p class="text-xs text-gray-500">2 hours ago</p>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-3 py-1 text-white text-sm rounded-full bg-brand-red hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/add_friend.png" alt="Add friend" class="w-4 h-4">
+                        Suivre
+                    </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-7 h-7 bg-brand-red text-white rounded-full flex items-center justify-center hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/save.png" alt="Save" class="w-5 h-5">
+                    </button>
+                    <button
+                        class="w-7 h-7 text-gray-700 rounded-full flex items-center justify-center bg-white border border-brand-red hover:border-brand-red/50 transition-colors">
+                        <img src="/src/assets/icons/dots_red.png" alt="More" class="w-5 h-5">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-3">
+                <div class="flex-1">
+                    <h1 class="text-black font-redhat text-2xl mb-1">Runtime components are missing</h1>
+                    <p class="text-black font-poppins line-clamp-3">
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!
+                    </p>
+                </div>
+                <div class="w-25 h-25 bg-gray-200 border border-gray-400 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="/src/assets/icons/post_image.png" alt="Post Image" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Post footer: interactions + tag -->
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2 text-sm text-gray-600">
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/downvote.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/repost_red.png" alt="Repost" class="w-4 h-4">
+                        </button>
+                        2
+                    </div>
+                </div>
+                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-700">#JavaFx</span>
+            </div>
+        </article>
+        <article class="bg-white rounded-xl p-4 mb-3" style="box-shadow: -4px 0 6px -2px rgba(0,0,0,0.3);">
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Kamel Touati</h4>
+                        <p class="text-xs text-gray-500">2 hours ago</p>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-3 py-1 text-white text-sm rounded-full bg-brand-red hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/add_friend.png" alt="Add friend" class="w-4 h-4">
+                        Suivre
+                    </button>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="w-7 h-7 bg-brand-red text-white rounded-full flex items-center justify-center hover:bg-brand-darkRed transition-colors">
+                        <img src="/src/assets/icons/save.png" alt="Save" class="w-5 h-5">
+                    </button>
+                    <button
+                        class="w-7 h-7 text-gray-700 rounded-full flex items-center justify-center bg-white border border-brand-red hover:border-brand-red/50 transition-colors">
+                        <img src="/src/assets/icons/dots_red.png" alt="More" class="w-5 h-5">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-3">
+                <div class="flex-1">
+                    <h1 class="text-black font-redhat text-2xl mb-1">Runtime components are missing</h1>
+                    <p class="text-black font-poppins line-clamp-3">
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!
+                        This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                        of time!This error keeps popping whenever I try to run. Would you please try to help me? I'm
+                        running out
+                        of time!This error keeps popping whenever I try to run. Would you please try to help me? I'm
+                        running out
+                        of time!
+                    </p>
+                </div>
+                <div class="w-25 h-25 bg-gray-200 border border-gray-400 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="/src/assets/icons/post_image.png" alt="Post Image" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Post footer: interactions + tag -->
+            <div class="flex items-center justify-between">
+                <div class="flex gap-2 text-sm text-gray-600">
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/downvote.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+                    </div>
+                    <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/repost_red.png" alt="Repost" class="w-4 h-4">
+                        </button>
+                        2
+                    </div>
+                </div>
+                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full text-gray-700">#JavaFx</span>
+            </div>
+        </article>
+    </main>
+
+    <!-- Right sidebar -->
+    <aside class="w-72 bg-white p-4 space-y-2 flex-none">
+        <!-- Popular tags -->
+        <div class="bg-brand-red/75 border rounded-xl p-4 py-2">
+            <div class="flex items-center gap-2 mb-2">
+                <div
+                    class="w-6 h-6 bg-white rounded-full flex items-center justify-center flex-shrink-0 transition-colors">
+                    <img src="/src/assets/icons/etiquette.png" alt="Tags Icon" class="w-3 h-3">
+                </div>
+                <h3 class="font-redhat text-white text-lg">Most Popular Tags</h3>
+            </div>
+            <div class="flex flex-col space-y-2 px-6">
+                <span
+                    class="px-3 py-1 bg-white text-brand-red text-sm text-center rounded-full shadow-[2px_-2px_4px_rgba(0,0,0,0.1)] hover:text-white hover:bg-brand-red cursor-pointer transition-colors">#JavaFx</span>
+                <span
+                    class="px-3 py-1 bg-white text-brand-red text-sm text-center rounded-full shadow-[2px_-2px_4px_rgba(0,0,0,0.1)] hover:text-white hover:bg-brand-red cursor-pointer transition-colors">#Symfony</span>
+                <span
+                    class="px-3 py-1 bg-white text-brand-red text-sm text-center rounded-full shadow-[2px_-2px_4px_rgba(0,0,0,0.1)] hover:text-white hover:bg-brand-red cursor-pointer transition-colors">#Xampp</span>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="border border-brand-red/50 rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-2">
+                <div
+                    class="w-6 h-6 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0 transition-colors">
+                    <img src="/src/assets/icons/faq.png" alt="FAQ Icon" class="w-4 h-4">
+                </div>
+                <h3 class="font-redhat text-brand-red text-lg">FAQ</h3>
+            </div>
+            <div class="flex flex-col gap-1 space-y-3">
+                <span
+                    class="px-2 py-2 bg-white text-brand-red text-xs text-center rounded-2xl border border-brand-red/50 shadow-[2px_-2px_3px_rgba(0,0,0,0.1)] hover:text-white hover:bg-brand-red cursor-pointer transition-colors">JavaFx
+                    Scene Not Loading</span>
+                <span
+                    class="px-2 py-2 bg-white text-brand-red text-xs text-center rounded-2xl border border-brand-red/50 shadow-[2px_-2px_3px_rgba(0,0,0,0.1)] hover:text-white hover:bg-brand-red cursor-pointer transition-colors">Symfony
+                    Routing Error</span>
+                <span
+                    class="px-2 py-2 bg-white text-brand-red text-xs text-center rounded-2xl border border-brand-red/50 shadow-[2px_-2px_3px_rgba(0,0,0,0.1)] hover:text-white hover:bg-brand-red cursor-pointer transition-colors">JavaFx
+                    EventHandler Issue</span>
+                <span
+                    class="px-2 py-2 bg-white text-brand-red text-xs text-center rounded-2xl border border-brand-red/50 shadow-[2px_-2px_3px_rgba(0,0,0,0.1)] hover:text-white hover:bg-brand-red cursor-pointer transition-colors">Symfony
+                    Form Validation</span>
+            </div>
+        </div>
+    </aside>
+</div>
