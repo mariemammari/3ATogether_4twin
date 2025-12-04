@@ -63,11 +63,11 @@ function addMessageToChat(message, sender) {
     const messageDiv = document.createElement('div');
     
     if (sender === 'user') {
-        messageDiv.className = 'bg-brand-red text-white rounded-2xl p-3 ml-8';
-        messageDiv.innerHTML = `<p class="text-sm">${escapeHtml(message)}</p>`;
+        messageDiv.className = 'inline-block bg-brand-red text-white rounded-2xl p-3 ml-8 max-w-[70%] break-words';
+        messageDiv.innerHTML = `<p class="text-sm break-words">${escapeHtml(message)}</p>`;
     } else {
-        messageDiv.className = 'bg-gray-100 rounded-2xl p-3 mr-8';
-        messageDiv.innerHTML = `<p class="text-sm text-gray-700">${escapeHtml(message)}</p>`;
+        messageDiv.className = 'inline-block bg-gray-100 rounded-2xl p-3 mr-8 max-w-[70%] break-words';
+        messageDiv.innerHTML = `<p class="text-sm text-gray-700 break-words">${escapeHtml(message)}</p>`;
     }
     
     chatMessages.appendChild(messageDiv);
