@@ -1,6 +1,297 @@
-<div class="p-6">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">tag page</h1>
-    <div class="bg-white rounded-lg shadow p-6">
-        <p class="text-gray-600">these are the tags !</p>
+
+<header class="bg-white text-white flex-none  top-0 z-50 py-6 px-4 ">
+    <div class="flex items-start justify-between">
+        <!-- Left: Logo, greeting, subtitle, sorting -->
+        <div class="flex flex-col gap-2 w-full"  >
+
+            <!-- Title with icon -->
+            <div class="flex items-center gap-2 mb-4 " >
+                                <h1 class="text-black text-3xl font-poppins">Tags!</h1>
+
+                <div
+                    class="flex items-center justify-center flex-shrink-0 ">
+                    <img src="/src/assets/icons/tag-forme-noire.png" alt="Home Icon" class="w-6 h-6">
+                </div>
+            </div>
+
+            <div class="flex items-center  justify-between w-full mg-6  ">
+
+             <!-- Barre de recherche -->
+<div class="flex w-[400px] h-10 bg-white rounded-full border border-red-500 items-center px-5  mb-4 shadow-lg">
+    <button class="flex items-center gap-2">
+    <img src="/src/assets/icons/loupe.png" class="w-5 h-5" alt="Search Icon">
+    
+</button>
+
+    <input type="text" placeholder="Search Tag"
+        class="flex-1 h-full bg-transparent outline-none text-gray-700 text-sm">
+    <button class="text-gray-400 ml-2">🎙️</button>
+</div>
+
+
+
+              <!-- Tous les boutons alignés à droite -->
+                <div class="flex items-center gap-3">
+
+        <!-- Bouton Java -->
+        <button
+              class="h-8 px-4 bg-gray-200 border border-gray-300 rounded-lg flex items-center gap-2 hover:bg-gray-300 transition shadow-sm">
+             <span class="w-5 h-5 bg-gray-800 rounded-full flex items-center justify-center">
+               <span class="text-white text-xs font-bold">!</span>
+             </span>
+            <span class="text-gray-800 font-medium text-sm">Java</span>
+        </button>
+
+
+        <!-- Bouton Symfony -->
+        <button
+              class="h-8 px-4 bg-gray-200 border border-gray-300 rounded-lg flex items-center gap-2 hover:bg-gray-300 transition shadow-sm">
+             <span class="w-5 h-5 bg-gray-800 rounded-full flex items-center justify-center">
+               <span class="text-white text-xs font-bold">!</span>
+             </span>
+            <span class="text-gray-800 font-medium text-sm">Symfony</span>
+        </button>
+        <!-- Bouton XAMPP -->
+         <button
+              class="h-8 px-4 bg-gray-200 border border-gray-300 rounded-lg flex items-center gap-2 hover:bg-gray-300 transition shadow-sm">
+             <span class="w-5 h-5 bg-gray-800 rounded-full flex items-center justify-center">
+               <span class="text-white text-xs font-bold">!</span>
+             </span>
+            <span class="text-gray-800 font-medium text-sm">XAMPP</span>
+        </button>
+
+        <!-- Bouton Trier par -->
+        <button
+            class="h-8 px-4 bg-white border border-gray-300  flex items-center gap-2 hover:bg-gray-50 transition shadow-lg">
+            <img src="/src/assets/icons/filtre.png" class="w-5 h-5" alt="Sort Icon">
+            <span class="text-gray-800 font-medium text-sm">Trier par</span>
+        </button>
+
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+</header>
+
+
+
+
+
+<div class="grid grid-cols-2 gap-6 mt-28 pb-4">
+        <!-- Card 1 -->
+<div
+        class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between border border-gray-200 w-full min-h-[200px]">
+        <!-- Ligne du haut : tag + boutons -->
+        <div class="flex items-center justify-between">
+           <span class="bg-brand-red text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-2">
+              <img src="/src/assets/icons/tagBlanc.png" class="w-4 h-4" alt="Java Icon">
+                  Java
+            </span>
+
+            <div class="flex items-center gap-2">
+               <button
+                   class="bg-white border rounded-full hover:bg-red-50 transition">
+                        <img src="/src/assets/icons/savet.png" class="w-6 h-6" alt="Save Icon">
+                    </button>
+
+               
+                   <button
+                   class="w-8 h-8 bg-white border border-red-500 text-red-500 rounded-full flex items-center justify-center hover:bg-red-50 transition shadow-lg">
+                   ⋮
+                 </button>
+
+
+            </div>
+        </div>
+
+        <!-- Contenu texte + image -->
+        <div class="flex gap-3">
+            <p class="text-black text-base leading-snug flex-1">Programmation objet, JVM, JavaFX, Hibernate...
+            </p>
+            <div class="w-[120px] h-[80px] bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                Image</div>
+        </div>
+
+        <!-- Ligne bas : likes/commentaires + voir plus -->
+        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+            <div class="flex gap-2">
+                <button class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700
+                         hover:bg-red-50 transition">
+                         <img src="/src/assets/icons/ques.png" class="w-4 h-4" alt="Save Icon">
+                         <span class="font-medium">12</span>
+                    </button>
+                    <button class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700
+                              hover:bg-red-50 transition">
+                             <img src="/src/assets/icons/comment.png" class="w-4 h-4" alt="Save Icon">
+                              <span class="font-medium">18</span>
+                    </button>
+            </div>
+            <button
+                class="text-red-500 font-semibold text-sm underline hover:text-red-600 transition cursor-pointer">Voir
+                Plus</button>
+        </div>
+    </div>
+    <!-- Card 2 -->
+<div
+        class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between border border-gray-200 w-full min-h-[200px]">
+        <!-- Ligne du haut : tag + boutons -->
+        <div class="flex items-center justify-between">
+           <span class="bg-brand-red text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-2">
+              <img src="/src/assets/icons/tagBlanc.png" class="w-4 h-4" alt="Java Icon">
+                  Java
+            </span>
+
+            <div class="flex items-center gap-2">
+               <button
+                   class="bg-white border rounded-full hover:bg-red-50 transition">
+                        <img src="/src/assets/icons/savet.png" class="w-6 h-6" alt="Save Icon">
+                    </button>
+
+               
+                   <button
+                   class="w-8 h-8 bg-white border border-red-500 text-red-500 rounded-full flex items-center justify-center hover:bg-red-50 transition shadow-lg">
+                   ⋮
+                 </button>
+
+
+            </div>
+        </div>
+
+        <!-- Contenu texte + image -->
+        <div class="flex gap-3">
+            <p class="text-black text-base leading-snug flex-1">Programmation objet, JVM, JavaFX, Hibernate...
+            </p>
+            <div class="w-[120px] h-[80px] bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                Image</div>
+        </div>
+
+        <!-- Ligne bas : likes/commentaires + voir plus -->
+        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+            <div class="flex gap-2">
+                <button class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700
+                         hover:bg-red-50 transition">
+                         <img src="/src/assets/icons/ques.png" class="w-4 h-4" alt="Save Icon">
+                         <span class="font-medium">12</span>
+                    </button>
+                    <button class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700
+                              hover:bg-red-50 transition">
+                             <img src="/src/assets/icons/comment.png" class="w-4 h-4" alt="Save Icon">
+                              <span class="font-medium">18</span>
+                    </button>
+            </div>
+            <button
+                class="text-red-500 font-semibold text-sm underline hover:text-red-600 transition cursor-pointer">Voir
+                Plus</button>
+        </div>
+    </div>
+    <!-- Card 3 -->
+    <div
+        class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between border border-gray-200 w-full min-h-[200px]">
+        <!-- Ligne du haut : tag + boutons -->
+        <div class="flex items-center justify-between">
+           <span class="bg-brand-red text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-2">
+              <img src="/src/assets/icons/tagBlanc.png" class="w-4 h-4" alt="Java Icon">
+                  Java
+            </span>
+
+            <div class="flex items-center gap-2">
+               <button
+                   class="bg-white border rounded-full hover:bg-red-50 transition">
+                        <img src="/src/assets/icons/savet.png" class="w-6 h-6" alt="Save Icon">
+                    </button>
+
+               
+                   <button
+                   class="w-8 h-8 bg-white border border-red-500 text-red-500 rounded-full flex items-center justify-center hover:bg-red-50 transition shadow-lg">
+                   ⋮
+                 </button>
+
+
+            </div>
+        </div>
+
+        <!-- Contenu texte + image -->
+        <div class="flex gap-3">
+            <p class="text-black text-base leading-snug flex-1">Programmation objet, JVM, JavaFX, Hibernate...
+            </p>
+            <div class="w-[120px] h-[80px] bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                Image</div>
+        </div>
+
+        <!-- Ligne bas : likes/commentaires + voir plus -->
+        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+            <div class="flex gap-2">
+                <button class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700
+                         hover:bg-red-50 transition">
+                         <img src="/src/assets/icons/ques.png" class="w-4 h-4" alt="Save Icon">
+                         <span class="font-medium">12</span>
+                    </button>
+                    <button class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700
+                              hover:bg-red-50 transition">
+                             <img src="/src/assets/icons/comment.png" class="w-4 h-4" alt="Save Icon">
+                              <span class="font-medium">18</span>
+                    </button>
+            </div>
+            <button
+                class="text-red-500 font-semibold text-sm underline hover:text-red-600 transition cursor-pointer">Voir
+                Plus</button>
+        </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div
+        class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between border border-gray-200 w-full min-h-[200px]">
+        <!-- Ligne du haut : tag + boutons -->
+        <div class="flex items-center justify-between">
+           <span class="bg-brand-red text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-2">
+              <img src="/src/assets/icons/tagBlanc.png" class="w-4 h-4" alt="Java Icon">
+                  Java
+            </span>
+
+            <div class="flex items-center gap-2">
+               <button
+                   class="bg-white border rounded-full hover:bg-red-50 transition">
+                        <img src="/src/assets/icons/savet.png" class="w-6 h-6" alt="Save Icon">
+                    </button>
+
+               
+                   <button
+                   class="w-8 h-8 bg-white border border-red-500 text-red-500 rounded-full flex items-center justify-center hover:bg-red-50 transition shadow-lg">
+                   ⋮
+                 </button>
+
+
+            </div>
+        </div>
+
+        <!-- Contenu texte + image -->
+        <div class="flex gap-3">
+            <p class="text-black text-base leading-snug flex-1">Programmation objet, JVM, JavaFX, Hibernate...
+            </p>
+            <div class="w-[120px] h-[80px] bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                Image</div>
+        </div>
+
+        <!-- Ligne bas : likes/commentaires + voir plus -->
+        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+            <div class="flex gap-2">
+                <button class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700
+                         hover:bg-red-50 transition">
+                         <img src="/src/assets/icons/ques.png" class="w-4 h-4" alt="Save Icon">
+                         <span class="font-medium">12</span>
+                    </button>
+                    <button class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700
+                              hover:bg-red-50 transition">
+                             <img src="/src/assets/icons/comment.png" class="w-4 h-4" alt="Save Icon">
+                              <span class="font-medium">18</span>
+                    </button>
+            </div>
+            <button
+                class="text-red-500 font-semibold text-sm underline hover:text-red-600 transition cursor-pointer">Voir
+                Plus</button>
+        </div>
     </div>
 </div>
