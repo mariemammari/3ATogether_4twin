@@ -11,7 +11,7 @@ async function loadPage(pageName) {
 
 // Load home page when website starts
 window.addEventListener('DOMContentLoaded', function () {
-    loadPage('home');
+    loadPage('profile');
 });
 
 // Sidebar dropdown functions
