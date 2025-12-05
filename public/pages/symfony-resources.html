@@ -1,0 +1,125 @@
+<!-- HEADER -->
+<header class="h-24 bg-white px-6 flex items-center justify-between sticky top-0 z-10 border-b">
+  <button onclick="loadPage('results')" class="text-2xl text-gray-600 hover:text-brand-red">‹</button>
+
+  <div class="text-center flex-1">
+    <h1 class="text-xl font-bold font-poppins text-brand-black">Centre d'Aide Symfony - Ressources et dépannage</h1>
+  </div>
+
+  <button class="text-2xl text-gray-400">›</button>
+</header>
+
+<!-- CONTENU PRINCIPAL -->
+<div class="flex flex-1 overflow-hidden relative">
+  <main class="flex-1 min-h-screen overflow-y-auto p-6 bg-gray-50 space-y-6 pb-32">
+
+    <!-- CARTES RESSOURCES -->
+    <section class="grid grid-cols-2 gap-4">
+      <!-- Ressource Symfony -->
+      <div class="bg-white rounded-2xl border p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <h3 class="font-semibold font-poppins text-brand-black mb-2">Ressource Symfony</h3>
+        <p class="text-sm text-gray-500 font-redhat mb-4">Documentation complète et guides pratiques</p>
+        <button onclick="window.open('https://symfony.com/doc/current/index.html', '_blank')" class="bg-red-600 text-white px-6 py-2 rounded-full text-sm font-redhat hover:bg-red-700 transition">
+          Consulter
+        </button>
+      </div>
+
+      <!-- Analyses des problèmes -->
+      <div class="bg-white rounded-2xl border p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        </div>
+        <h3 class="font-semibold font-poppins text-brand-black mb-2">Analyses des problèmes</h3>
+        <p class="text-sm text-gray-500 font-redhat mb-4">Statistiques et erreurs fréquentes</p>
+        <button onclick="showSymfonyStats()" class="bg-red-600 text-white px-6 py-2 rounded-full text-sm font-redhat hover:bg-red-700 transition">
+          Voir les stats
+        </button>
+      </div>
+    </section>
+
+    <!-- TUTORIELS VIDÉO -->
+    <section class="space-y-4 flex-shrink-0 w-full">
+      <h2 class="text-lg font-semibold font-poppins text-brand-black">Tutoriels vidéo</h2>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        <!-- Vidéo 1 -->
+        <div class="bg-white rounded-2xl border overflow-hidden">
+          <div class="relative bg-gradient-to-br from-gray-900 to-gray-700 h-40 flex items-center justify-center cursor-pointer"
+               onclick="playVideo('https://www.youtube.com/embed/qFoKIdAJV84')">
+            <button class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 hover:scale-110 transition-all">
+              <span class="text-white font-bold text-lg ml-1">▶</span>
+            </button>
+            <span class="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">12:45</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold font-poppins text-brand-black text-sm mb-1">Introduction à Symfony</h3>
+            <p class="text-xs text-gray-500 font-redhat">2.3k vues</p>
+          </div>
+        </div>
+
+        <!-- Vidéo 2 -->
+        <div class="bg-white rounded-2xl border overflow-hidden">
+          <div class="relative bg-gradient-to-br from-gray-900 to-gray-700 h-40 flex items-center justify-center cursor-pointer"
+               onclick="playVideo('https://www.youtube.com/embed/Bo0guUbL5uo')">
+            <button class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 hover:scale-110 transition-all">
+              <span class="text-white font-bold text-lg ml-1">▶</span>
+            </button>
+            <span class="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">8:30</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold font-poppins text-brand-black text-sm mb-1">Connexion BDD</h3>
+            <p class="text-xs text-gray-500 font-redhat">1.8k vues</p>
+          </div>
+        </div>
+
+        <!-- Vidéo 3 -->
+        <div class="bg-white rounded-2xl border overflow-hidden">
+          <div class="relative bg-gradient-to-br from-gray-900 to-gray-700 h-40 flex items-center justify-center cursor-pointer"
+               onclick="playVideo('https://www.youtube.com/embed/i1LikeqOOZ8')">
+            <button class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 hover:scale-110 transition-all">
+              <span class="text-white font-bold text-lg ml-1">▶</span>
+            </button>
+            <span class="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-1 rounded">15:20</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold font-poppins text-brand-black text-sm mb-1">Doctrine ORM</h3>
+            <p class="text-xs text-gray-500 font-redhat">3.1k vues</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTAGER UN PROBLÈME -->
+    <section class="bg-white rounded-2xl border p-6">
+      <h2 class="text-lg font-semibold font-poppins text-brand-black mb-4">Partager un problème spécifique</h2>
+
+      <div class="space-y-4">
+        <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center">
+          <input type="file" id="file-upload" accept="image/png,image/jpeg,application/pdf" multiple class="hidden" onchange="handleFileUpload(event)">
+          <label for="file-upload" class="cursor-pointer">
+            <div class="flex flex-col items-center gap-3">
+              <span style="font-size:48px;color:#C51718;">📎</span>
+              <div>
+                <p class="font-semibold font-poppins text-brand-black">Joindre des fichiers</p>
+                <p class="text-sm text-gray-500 font-redhat mt-1">PNG, JPG, PDF (Max 10MB)</p>
+              </div>
+            </div>
+          </label>
+          <div id="file-list" class="mt-4 space-y-2"></div>
+        </div>
+
+        <button onclick="openQuestionForm()" class="w-full bg-red-600 text-white px-6 py-3 rounded-full font-redhat hover:bg-red-700 transition">
+          Poser une question
+        </button>
+      </div>
+    </section>
+
+  </main>
+</div>

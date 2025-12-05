@@ -13,7 +13,23 @@ async function loadPage(pageName) {
     // Si on charge la page results, afficher les résultats filtrés
     if (pageName === 'results') {
       displayResults(currentFilter);
-      initResultsSearch(); // ← AJOUTE CETTE LIGNE
+      initResultsSearch();
+    }
+    
+    // Si on charge la page symfony-resources, initialiser la modal vidéo
+    if (pageName === 'symfony-resources') {
+      initVideoModal();
+      
+      // DEBUG: Compter les vidéos
+      setTimeout(() => {
+        const videos = document.querySelectorAll('.grid.grid-cols-3 > div');
+        console.log('🎬 Nombre de vidéos détectées:', videos.length);
+        videos.forEach((video, index) => {
+          console.log(`Vidéo ${index + 1}:`, video);
+          console.log('  - Visible?', video.offsetWidth > 0 && video.offsetHeight > 0);
+          console.log('  - Display:', window.getComputedStyle(video).display);
+        });
+      }, 100);
     }
 
   } catch (error) {
@@ -458,18 +474,18 @@ function togglePin(button) {
   
   if (isPinned) {
     button.classList.remove('pinned');
-    button.style.filter = 'grayscale(0%)';
+    button.style.filter = 'grayscale(50%)';
     button.title = 'Épingler';
   } else {
     button.classList.add('pinned');
-    button.style.filter = 'grayscale(0%) brightness(1.2)';
+    button.style.filter = 'grayscale(0%) brightness(1.5) drop-shadow(0 0 8px rgba(197, 23, 24, 0.5))';
     button.title = 'Désépingler';
   }
   
   // Animation
-  button.style.transform = 'scale(1.3)';
+  button.style.transform = 'scale(1.3) rotate(15deg)';
   setTimeout(() => {
-    button.style.transform = 'scale(1)';
+    button.style.transform = 'scale(1) rotate(0deg)';
   }, 200);
 }
 
@@ -507,3 +523,143 @@ function toggleStar(button) {
     button.style.transform = 'scale(1)';
   }, 200);
 }
+
+// ==========================================
+// INITIALISER LA MODAL VIDÉO
+// ==========================================
+function initVideoModal() {
+  // Créer la modal si elle n'existe pas
+  if (!document.getElementById('video-modal')) {
+    const modalHTML = `
+      <div id="video-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 99999; align-items: center; justify-content: center;">
+        <div style="position: relative; width: 90%; max-width: 900px;">
+          <button onclick="closeVideo()" style="position: absolute; top: -40px; right: 0; background: none; border: none; color: white; font-size: 32px; cursor: pointer;">✕</button>
+          <iframe id="video-iframe" width="100%" height="500" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  }
+}
+
+// ==========================================
+// LIRE UNE VIDÉO
+// ==========================================
+function playVideo(url) {
+  const modal = document.getElementById('video-modal');
+  const iframe = document.getElementById('video-iframe');
+  
+  if (modal && iframe) {
+    iframe.src = url + '?autoplay=1';
+    modal.style.display = 'flex';
+  }
+}
+
+function closeVideo() {
+  const modal = document.getElementById('video-modal');
+  const iframe = document.getElementById('video-iframe');
+  
+  if (modal && iframe) {
+    iframe.src = '';
+    modal.style.display = 'none';
+  }
+}
+
+
+// ==========================================
+// AFFICHER LES STATISTIQUES SYMFONY
+// ==========================================
+function showSymfonyStats() {
+  const statsHTML = `
+    <div id="stats-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99999; display: flex; align-items: center; justify-content: center;">
+      <div style="background: white; border-radius: 16px; max-width: 600px; width: 90%; padding: 32px; position: relative;">
+        <button onclick="closeStats()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: #6b7280;">&times;</button>
+        
+        <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 24px; color: #111827;">Statistiques des problèmes Symfony</h2>
+        
+        <div style="space-y: 16px;">
+          <!-- Erreur BDD -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 14px; font-weight: 500;">Erreur connexion BDD</span>
+              <span style="font-size: 14px; font-weight: 600; color: #C51718;">35%</span>
+            </div>
+            <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="width: 35%; background: #C51718; height: 100%;"></div>
+            </div>
+          </div>
+          
+          <!-- Erreur 500 -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 14px; font-weight: 500;">Erreur 500 serveur</span>
+              <span style="font-size: 14px; font-weight: 600; color: #C51718;">28%</span>
+            </div>
+            <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="width: 28%; background: #C51718; height: 100%;"></div>
+            </div>
+          </div>
+          
+          <!-- Migration Doctrine -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 14px; font-weight: 500;">Problème migration Doctrine</span>
+              <span style="font-size: 14px; font-weight: 600; color: #C51718;">22%</span>
+            </div>
+            <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="width: 22%; background: #C51718; height: 100%;"></div>
+            </div>
+          </div>
+          
+          <!-- Routing -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 14px; font-weight: 500;">Erreur routing</span>
+              <span style="font-size: 14px; font-weight: 600; color: #C51718;">15%</span>
+            </div>
+            <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="width: 15%; background: #C51718; height: 100%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', statsHTML);
+}
+
+function closeStats() {
+  const modal = document.getElementById('stats-modal');
+  if (modal) modal.remove();
+}
+
+// ==========================================
+// GÉRER L'UPLOAD DE FICHIERS
+// ==========================================
+function handleFileUpload(event) {
+  const files = event.target.files;
+  const fileList = document.getElementById('file-list');
+  
+  if (!fileList) return;
+  
+  fileList.innerHTML = '';
+  
+  Array.from(files).forEach(file => {
+    const fileItem = document.createElement('div');
+    fileItem.className = 'flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg';
+    fileItem.innerHTML = `
+      <span class="text-sm font-redhat">${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+      <button onclick="this.parentElement.remove()" class="text-red-600 hover:text-red-700">✕</button>
+    `;
+    fileList.appendChild(fileItem);
+  });
+}
+
+// ==========================================
+// OUVRIR LE FORMULAIRE DE QUESTION
+// ==========================================
+function openQuestionForm() {
+  alert('Formulaire de question à développer : titre, description, fichiers attachés');
+}
+
