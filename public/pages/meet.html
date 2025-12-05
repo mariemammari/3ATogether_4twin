@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réunion Java</title>
     <link href="/output.css" rel="stylesheet">
+    <style> 
+        .space-y-6>:not([hidden])~:not([hidden]) {
+        --tw-space-y-reverse: 0;
+        margin-top: 0em; 
+        margin-bottom: 0em;
+        }   
+    </style>
 </head>
 <body class="bg-gray-50 font-poppins">
 
     <!-- Top Bar -->
-    <div class="px-4 pt-1 pb-2 relative flex items-center">
+    <div class="px-4 top-0 pb-1 relative flex items-center">
         <button onclick="history.back()" class="w-10 h-10 flex items-center justify-center hover:opacity-75 transition-opacity">
             <img src="/src/assets/icons/backarrow.png" alt="Back" class="w-8 h-8">
         </button>
     </div>
 
     <!-- Main Content Container -->
-    <div class="p-4 max-w-6xl mx-auto">
+    <div class="px-4 pb-4 max-w-6xl mx-auto">
         
         <!-- The Big Card -->
         <div class="bg-white border border-brand-red rounded-[30px] p-8 relative shadow-sm min-h-[600px]">
