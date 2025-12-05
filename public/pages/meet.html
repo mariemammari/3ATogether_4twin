@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réunion Java</title>
+    <link href="/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-poppins">
+
+    <!-- Top Bar -->
+    <div class="px-4 pt-1 pb-2 relative flex items-center">
+        <button onclick="history.back()" class="w-10 h-10 flex items-center justify-center hover:opacity-75 transition-opacity">
+            <img src="/src/assets/icons/backarrow.png" alt="Back" class="w-8 h-8">
+        </button>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="p-4 max-w-6xl mx-auto">
+        
+        <!-- The Big Card -->
+        <div class="bg-white border border-brand-red rounded-[30px] p-8 relative shadow-sm min-h-[600px]">
+            
+            <!-- Header Row -->
+            <div class="flex justify-between items-center mb-2">
+                <!-- Left: Icon + Title -->
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/src/assets/icons/reunion.png" alt="Reunion" class="w-7 h-7 brightness-0 invert filter">
+                    </div>
+                    <h1 class="text-4xl font-bold text-black">Réunion Java</h1>
+                </div>
+
+                <!-- Right: Calendar Icon -->
+                <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                    <img src="/src/assets/icons/003-calendar.png" alt="Calendar" class="w-7 h-7 brightness-0 invert filter">
+                </div>
+            </div>
+
+            <!-- Organizer & Date Row -->
+            <div class="flex justify-between items-start relative mb-10 px-2">
+                
+                <!-- Organizer Label -->
+                <div class="text-gray-500 italic text-xl mt-2">
+                    Organisé par
+                </div>
+
+                <!-- Center: Avatar & Name -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 top-0 flex flex-col items-center">
+                    <div class="w-28 h-28 rounded-full border-2 border-brand-red p-1 flex items-center justify-center mb-3 bg-white">
+                        <img src="/src/assets/icons/avatar.png" alt="Avatar" class="w-full h-full rounded-full object-cover">
+                    </div>
+                    <h2 class="text-2xl font-bold text-black">Zayati Sofiene</h2>
+                </div>
+
+                <!-- Right: Date/Time -->
+                <div class="flex items-center gap-2 text-brand-red font-bold text-xl mt-2">
+                    <img src="/src/assets/icons/clock.png" alt="Clock" class="w-6 h-6">
+                    <span>14-10-25 à 16h</span>
+                </div>
+            </div>
+
+            <!-- Content Columns -->
+            <div class="flex gap-12 mt-16">
+                
+                <!-- Left Column: Details -->
+                <div class="flex-1 space-y-10 pt-4">
+                    
+                    <!-- Link Section -->
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-full border border-brand-red flex items-center justify-center flex-shrink-0">
+                            <img src="/src/assets/icons/link.png" alt="Link" class="w-6 h-6">
+                        </div>
+                        <div>
+                            <h3 class="text-brand-red font-bold text-2xl mb-1">Lien</h3>
+                            <a href="#" class="text-black font-medium hover:text-brand-red break-all">https://meet.google.com/abc-defg-hij</a>
+                        </div>
+                    </div>
+
+                    <!-- Description Section -->
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-full border border-brand-red flex items-center justify-center flex-shrink-0">
+                            <img src="/src/assets/icons/description.png" alt="Description" class="w-6 h-6">
+                        </div>
+                        <div>
+                            <h3 class="text-brand-red font-bold text-2xl mb-2">Description</h3>
+                            <p class="text-gray-800 leading-relaxed text-base">
+                                Join this meet to discuss how to set up and configure JavaFX for your PI project. We’ll non and n nthrough common installation issues, how to link JavaFX with IntelliJ or SceneBuilder, and fix frequent errors like “JavaFX runtime components are missing.”<br>
+                                Perfect for students struggling to get their JavaFX app running smoothly!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="flex gap-4 pt-6">
+                        <span class="px-8 py-2 rounded-full border border-brand-red text-brand-red font-medium bg-white shadow-sm">#Java</span>
+                        <span class="px-8 py-2 rounded-full border border-brand-red text-brand-red font-medium bg-white shadow-sm">#JavaFX</span>
+                        <span class="px-8 py-2 rounded-full border border-brand-red text-brand-red font-medium bg-white shadow-sm">#Symfony</span>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Requirements Card -->
+                <div class="w-[350px] flex-shrink-0">
+                    <div class="bg-brand-red-75 text-white rounded-[30px] p-8 shadow-lg h-full relative">
+                        
+                        <!-- Icon -->
+                        <div class="flex justify-center mb-6">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md">
+                                <img src="/src/assets/icons/!_red.png" alt="Alert" class="w-8 h-8">
+                            </div>
+                        </div>
+
+                        <!-- Title -->
+                        <h3 class="text-center font-bold text-2xl mb-8">Besoins techniques</h3>
+
+                        <!-- List -->
+                        <ul class="space-y-4 text-base font-medium">
+                            <li class="flex items-start gap-3">
+                                <span class="mt-2 w-1.5 h-1.5 bg-white rounded-full flex-shrink-0"></span>
+                                <span>JDK 17 ou version supérieure installé</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-2 w-1.5 h-1.5 bg-white rounded-full flex-shrink-0"></span>
+                                <span>SDK JavaFX configuré</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-2 w-1.5 h-1.5 bg-white rounded-full flex-shrink-0"></span>
+                                <span>XAMPP en fonctionnement (Apache & MySQL)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-2 w-1.5 h-1.5 bg-white rounded-full flex-shrink-0"></span>
+                                <span>IDE prêt (IntelliJ / Eclipse / NetBeans)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-2 w-1.5 h-1.5 bg-white rounded-full flex-shrink-0"></span>
+                                <span>Connexion Internet stable</span>
+                            </li>
+                        </ul>
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
