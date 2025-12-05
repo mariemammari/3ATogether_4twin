@@ -9,27 +9,21 @@ async function loadPage(pageName) {
     // Initialiser les fonctionnalités après chargement
     initIaChat();
     initFqaSearch();
-    
+
     // Si on charge la page results, afficher les résultats filtrés
     if (pageName === 'results') {
       displayResults(currentFilter);
       initResultsSearch();
     }
-    
+
     // Si on charge la page symfony-resources, initialiser la modal vidéo
     if (pageName === 'symfony-resources') {
       initVideoModal();
-      
-      // DEBUG: Compter les vidéos
-      setTimeout(() => {
-        const videos = document.querySelectorAll('.grid.grid-cols-3 > div');
-        console.log('🎬 Nombre de vidéos détectées:', videos.length);
-        videos.forEach((video, index) => {
-          console.log(`Vidéo ${index + 1}:`, video);
-          console.log('  - Visible?', video.offsetWidth > 0 && video.offsetHeight > 0);
-          console.log('  - Display:', window.getComputedStyle(video).display);
-        });
-      }, 100);
+    }
+
+    // Si on charge la page javafx-resources, initialiser aussi la modal vidéo
+    if (pageName === 'javafx-resources') {
+      initVideoModal();
     }
 
   } catch (error) {
@@ -661,5 +655,64 @@ function handleFileUpload(event) {
 // ==========================================
 function openQuestionForm() {
   alert('Formulaire de question à développer : titre, description, fichiers attachés');
+}
+function showJavafxStats() {
+  const statsHTML = `
+    <div id="stats-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99999; display: flex; align-items: center; justify-content: center;">
+      <div style="background: white; border-radius: 16px; max-width: 600px; width: 90%; padding: 32px; position: relative;">
+        <button onclick="closeStats()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: #6b7280;">&times;</button>
+        
+        <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 24px; color: #111827;">Statistiques des problèmes JavaFX</h2>
+        
+        <div style="space-y: 16px;">
+          <!-- Erreurs FXML / contrôleur -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 14px; font-weight: 500;">Erreur FXML / contrôleur</span>
+              <span style="font-size: 14px; font-weight: 600; color: #C51718;">38%</span>
+            </div>
+            <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="width: 38%; background: #C51718; height: 100%;"></div>
+            </div>
+          </div>
+          
+          <!-- Problèmes de modules -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 14px; font-weight: 500;">module-info / modules manquants</span>
+              <span style="font-size: 14px; font-weight: 600; color: #C51718;">27%</span>
+            </div>
+            <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="width: 27%; background: #C51718; height: 100%;"></div>
+            </div>
+          </div>
+          
+          <!-- Lancement / JVM -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 14px; font-weight: 500;">Paramètres JVM / lancement</span>
+              <span style="font-size: 14px; font-weight: 600; color: #C51718;">22%</span>
+            </div>
+            <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="width: 22%; background: #C51718; height: 100%;"></div>
+            </div>
+          </div>
+          
+          <!-- Connexion BDD -->
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-size: 14px; font-weight: 500;">Connexion BDD (JDBC)</span>
+              <span style="font-size: 14px; font-weight: 600; color: #C51718;">13%</span>
+            </div>
+            <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="width: 13%; background: #C51718; height: 100%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', statsHTML);
 }
 

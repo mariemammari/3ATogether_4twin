@@ -18,6 +18,8 @@ module.exports = {
         'brand-red-75': 'rgba(197, 23, 24, 0.75)',
         'brand-black': '#000000',
         'brand-grey': '#A4A4A4',
+        'primary': 'transparent',//
+        
       }
     },
   },
