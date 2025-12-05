@@ -1,20 +1,64 @@
-// Page loading functions
+// ==========================================
+// CONFIGURATION & VARIABLES GLOBALES
+// ==========================================
+const tags = ['JavaFX', 'XAMPP', 'Symfony', 'Git'];
+let currentFilter = null; // Pour gérer les filtres de la page résultats
+
+// ==========================================
+// SYSTÈME DE CHARGEMENT DE PAGES (INTEGRATED)
+// ==========================================
 async function loadPage(pageName) {
     try {
         const response = await fetch(`pages/${pageName}.html`);
+        
+        // Gestion d'erreur améliorée
+        if (!response.ok) throw new Error("Page introuvable");
+
         const html = await response.text();
         document.getElementById('content-container').innerHTML = html;
+
+        // --- Initialisations spécifiques (VOTRE TRAVAIL) ---
+        
+        // On initialise le Chatbot à chaque chargement de page (au cas où il serait dans le container)
+        initIaChat(); 
+        
+        // Initialisation de la recherche FAQ
+        initFqaSearch();
+
+        // Si on charge la page results, afficher les résultats filtrés
+        if (pageName === 'results') {
+            displayResults(currentFilter);
+            initResultsSearch();
+        }
+
+        // Si on charge la page symfony-resources, initialiser la modal vidéo
+        if (pageName === 'symfony-resources') {
+            initVideoModal();
+        }
+
+        // Si on charge la page javafx-resources, initialiser aussi la modal vidéo
+        if (pageName === 'javafx-resources') {
+            initVideoModal();
+        }
+
     } catch (error) {
-        document.getElementById('content-container').innerHTML = '<div class="p-6 text-red-600">Page non trouvée</div>';
+        console.error(error);
+        document.getElementById('content-container').innerHTML = 
+            '<div class="p-6 text-red-600">Page non trouvée ou erreur de chargement.</div>';
     }
 }
 
-// Load home page when website starts
+// Chargement initial au démarrage du site
 window.addEventListener('DOMContentLoaded', function () {
-    loadPage('home');
+    // Par défaut on charge 'home' (Groupe), mais on initialise aussi le chat
+    loadPage('home'); 
+    // Si la barre latérale ou le chat sont hors du "content-container", on peut les init ici aussi
+    initIaChat();
 });
 
-// Sidebar dropdown functions
+// ==========================================
+// LOGIQUE UI PARTAGÉE (SIDEBAR & DROPDOWN)
+// ==========================================
 function toggleDropdown(name) {
     const dropdown = document.getElementById(name + '-dropdown');
     const arrow = document.getElementById(name + '-arrow');
@@ -24,14 +68,26 @@ function toggleDropdown(name) {
     }
 }
 
-// Search functionality
-const tags = ['JavaFX', 'XAMPP', 'Symfony', 'Git'];
+// Close dropdown when clicking outside
+document.addEventListener('click', function (event) {
+    const dropdown = document.getElementById('tagSuggestions');
+    const tagInput = document.getElementById('tagInput');
 
+    if (dropdown && tagInput) {
+        if (!event.target.closest('#tagInput') && !event.target.closest('#tagSuggestions')) {
+            dropdown.classList.add('hidden');
+        }
+    }
+});
+
+// ==========================================
+// FONCTIONNALITÉS DE RECHERCHE (PARTAGÉ)
+// ==========================================
 function performSearch() {
     const searchInput = document.getElementById('searchInput');
     const tagInput = document.getElementById('tagInput');
-    const searchTerm = searchInput.value.trim();
-    const tagTerm = tagInput.value.trim();
+    const searchTerm = searchInput ? searchInput.value.trim() : '';
+    const tagTerm = tagInput ? tagInput.value.trim() : '';
 
     if (searchTerm || tagTerm) {
         let message = '';
@@ -48,18 +104,25 @@ function performSearch() {
         alert(message);
     }
 
-    document.getElementById('tagSuggestions').classList.add('hidden');
+    const suggestions = document.getElementById('tagSuggestions');
+    if(suggestions) suggestions.classList.add('hidden');
 }
 
 function showTagSuggestions() {
     const dropdown = document.getElementById('tagSuggestions');
-    dropdown.classList.remove('hidden');
-    filterTagSuggestions();
+    if(dropdown) {
+        dropdown.classList.remove('hidden');
+        filterTagSuggestions();
+    }
 }
 
 function filterTagSuggestions() {
-    const input = document.getElementById('tagInput').value.toLowerCase();
+    const inputEl = document.getElementById('tagInput');
     const tagList = document.getElementById('tagList');
+    
+    if (!inputEl || !tagList) return;
+
+    const input = inputEl.value.toLowerCase();
 
     if (!input) {
         // Show all tags
@@ -99,16 +162,535 @@ function getTagCount(tag) {
 
 function selectTag(tag) {
     const input = document.getElementById('tagInput');
-    input.value = tag;
-    document.getElementById('tagSuggestions').classList.add('hidden');
+    if(input) {
+        input.value = tag;
+        document.getElementById('tagSuggestions').classList.add('hidden');
+    }
 }
 
-// Close dropdown when clicking outside
-document.addEventListener('click', function (event) {
-    const dropdown = document.getElementById('tagSuggestions');
-    const tagInput = document.getElementById('tagInput');
-
-    if (!event.target.closest('#tagInput') && !event.target.closest('#tagSuggestions')) {
-        dropdown.classList.add('hidden');
+// ==========================================
+// VOTRE TRAVAIL: CHATBOT IA
+// ==========================================
+function initIaChat() {
+    const toggle = document.getElementById('ia-toggle');
+    const chat = document.getElementById('ia-chat');
+    const close = document.getElementById('ia-close');
+    const input = document.getElementById('ia-input');
+    const send = document.getElementById('ia-send');
+    const messages = document.getElementById('ia-messages');
+  
+    if (!toggle || !chat) return;
+  
+    // Ouvrir le chat
+    toggle.onclick = function() {
+      if (chat.style.display === 'none' || chat.style.display === '') {
+        chat.style.display = 'flex';
+        if(input) input.focus();
+      } else {
+        chat.style.display = 'none';
+      }
+    };
+  
+    // Fermer le chat
+    if (close) {
+      close.onclick = function() {
+        chat.style.display = 'none';
+      };
     }
-});
+  
+    // Envoyer un message
+    function envoyerMessage() {
+      if(!input || !messages) return;
+      
+      const texte = input.value.trim();
+      if (!texte) return;
+  
+      // Message utilisateur
+      const userDiv = document.createElement('div');
+      userDiv.style.cssText = 'display: flex; gap: 8px; justify-content: flex-end;';
+      userDiv.innerHTML = `
+        <div style="background: #C51718; color: white; padding: 8px 12px; border-radius: 12px; max-width: 80%; font-size: 13px;">${texte}</div>
+        <div style="width: 32px; height: 32px; background: #9ca3af; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; flex-shrink: 0;">U</div>
+      `;
+      messages.appendChild(userDiv);
+  
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+  
+      // Réponse IA après 1 seconde
+      setTimeout(function() {
+        const reponse = getReponseIA(texte);
+        const iaDiv = document.createElement('div');
+        iaDiv.style.cssText = 'display: flex; gap: 8px;';
+        iaDiv.innerHTML = `
+          <div style="width: 32px; height: 32px; background: #C51718; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; flex-shrink: 0;">IA</div>
+          <div style="background: white; padding: 8px 12px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-width: 80%; font-size: 13px; color: #374151;">${reponse}</div>
+        `;
+        messages.appendChild(iaDiv);
+        messages.scrollTop = messages.scrollHeight;
+      }, 1000);
+    }
+  
+    function getReponseIA(question) {
+      const q = question.toLowerCase();
+      if (q.includes('javafx') || q.includes('java')) return "Pour JavaFX, vérifie les modules et utilise --module-path.";
+      if (q.includes('xampp') || q.includes('apache')) return "Vérifie le port 80, parfois Skype/IIS l'utilisent.";
+      if (q.includes('symfony') || q.includes('bdd')) return "Vérifie DATABASE_URL dans .env puis lance migrate.";
+      return "Peux-tu préciser ton problème ?";
+    }
+  
+    // Bouton envoyer
+    if (send) {
+      send.onclick = envoyerMessage;
+    }
+  
+    // Touche Entrée
+    if (input) {
+      input.onkeydown = function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          envoyerMessage();
+        }
+      };
+    }
+}
+
+// ==========================================
+// VOTRE TRAVAIL: RECHERCHE FQA
+// ==========================================
+function initFqaSearch() {
+    const searchInput = document.getElementById('fqa-search');
+    if (!searchInput) return;
+  
+    searchInput.oninput = function() {
+      const value = this.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('article');
+  
+      cards.forEach(function(card) {
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+        const match = title.includes(value) || desc.includes(value);
+        card.style.display = (match || value === '') ? '' : 'none';
+      });
+    };
+}
+
+// ==========================================
+// VOTRE TRAVAIL: FILTRES FQA
+// ==========================================
+function removeFilter(button, filterName) {
+    button.remove();
+    applyFilters();
+}
+  
+function applyFilters() {
+    const activeFilters = document.querySelectorAll('#active-filters .filter-tag');
+    const cards = document.querySelectorAll('article[data-tags]');
+    
+    if (activeFilters.length === 0) {
+      cards.forEach(card => card.style.display = '');
+      return;
+    }
+    
+    const filters = Array.from(activeFilters).map(btn => btn.dataset.filter);
+    
+    cards.forEach(card => {
+      const cardTags = card.dataset.tags.toLowerCase();
+      const match = filters.some(filter => cardTags.includes(filter));
+      card.style.display = match ? '' : 'none';
+    });
+}
+
+// ==========================================
+// VOTRE TRAVAIL: GESTION PAGE RÉSULTATS
+// ==========================================
+function loadResultsPage(filter) {
+    currentFilter = filter;
+    loadPage('results');
+}
+
+function displayResults(filter) {
+    const resultsData = {
+      'javafx': {
+        titre: 'Résultats pour JavaFX',
+        count: 3,
+        results: [
+          {
+            titre: 'JavaFX Application ne démarre pas après build',
+            auteur: 'Hayfa Khadraoui',
+            date: 'Il y a 5 jours',
+            tags: ['JavaFX', 'Build'],
+            votes: 15
+          },
+          {
+            titre: 'Problème de module JavaFX introuvable',
+            auteur: 'Ahmed Ben Salem',
+            date: 'Il y a 2 semaines',
+            tags: ['JavaFX', 'Module'],
+            votes: 23
+          },
+          {
+            titre: 'Erreur de lancement SceneBuilder',
+            auteur: 'Sarah Mansour',
+            date: 'Il y a 3 semaines',
+            tags: ['JavaFX', 'SceneBuilder'],
+            votes: 18
+          }
+        ]
+      },
+      'symfony-bdd': {
+        titre: 'Résultats pour Symfony BDD',
+        count: 2,
+        results: [
+          {
+            titre: 'Connexion MySQL refusée dans Symfony',
+            auteur: 'Mohamed Trabelsi',
+            date: 'Il y a 1 semaine',
+            tags: ['Symfony', 'MySQL'],
+            votes: 31
+          },
+          {
+            titre: 'Erreur migration Doctrine',
+            auteur: 'Ines Gharbi',
+            date: 'Il y a 2 jours',
+            tags: ['Symfony', 'Doctrine'],
+            votes: 12
+          }
+        ]
+      },
+      'xampp': {
+        titre: 'Résultats pour XAMPP',
+        count: 2,
+        results: [
+          {
+            titre: 'Configuration XAMPP sur Windows 11',
+            auteur: 'Yosra Ben Ali',
+            date: 'Il y a 1 semaine',
+            tags: ['XAMPP', 'Config'],
+            votes: 31
+          },
+          {
+            titre: 'Apache ne démarre pas sur port 80',
+            auteur: 'Karim Bouaziz',
+            date: 'Il y a 4 jours',
+            tags: ['XAMPP', 'Apache'],
+            votes: 27
+          }
+        ]
+      },
+      'erreur-500': {
+        titre: 'Résultats pour Erreur 500',
+        count: 2,
+        results: [
+          {
+            titre: 'Erreur 500 après mise à jour Symfony',
+            auteur: 'Mariem Jebali',
+            date: 'Il y a 3 jours',
+            tags: ['Symfony', 'Erreur 500'],
+            votes: 19
+          },
+          {
+            titre: 'Internal Server Error PHP',
+            auteur: 'Anis Ghorbel',
+            date: 'Il y a 1 semaine',
+            tags: ['PHP', 'Erreur 500'],
+            votes: 22
+          }
+        ]
+      }
+    };
+  
+    const data = resultsData[filter] || resultsData['javafx'];
+    
+    // Mettre à jour le titre
+    const headerTitle = document.querySelector('header h1');
+    if (headerTitle) headerTitle.textContent = data.titre;
+    
+    const headerSubtitle = document.querySelector('header p');
+    if (headerSubtitle) headerSubtitle.textContent = `${data.count} solutions trouvées`;
+  
+    // Mettre à jour les résultats
+    const resultsContainer = document.querySelector('section:last-of-type');
+    if (!resultsContainer) return;
+  
+    let html = '<h2 class="text-lg font-semibold font-poppins text-brand-black mb-4">Résultats</h2>';
+    
+    data.results.forEach(result => {
+    html += `
+      <article class="bg-white rounded-2xl border p-4 flex items-start gap-4 mb-4">
+        <div class="flex-1">
+          <h3 class="font-semibold font-poppins text-brand-black mb-1">${result.titre}</h3>
+          <div class="flex items-center gap-2 text-sm text-gray-500 font-redhat mb-2">
+            <span>${result.auteur}</span>
+            <span>•</span>
+            <span>${result.date}</span>
+          </div>
+          <div class="flex gap-2">
+            ${result.tags.map(tag => `
+              <span class="px-3 py-0.5 rounded-full bg-red-100 text-red-700 text-xs font-redhat">${tag}</span>
+            `).join('')}
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <button onclick="togglePin(this)" class="text-2xl transition hover:scale-110" title="Épingler">
+            📌
+          </button>
+          <span class="text-sm font-semibold vote-count">${result.votes}</span>
+          <button onclick="toggleStar(this)" class="text-2xl transition hover:scale-110" title="Ajouter aux favoris">
+            ⭐
+          </button>
+        </div>
+      </article>
+    `;
+  });
+  
+    resultsContainer.innerHTML = html;
+}
+
+function initResultsSearch() {
+    const searchInput = document.querySelector('input[placeholder="Recherche par filtre"]');
+    if (!searchInput) return;
+  
+    searchInput.oninput = function() {
+      const value = this.value.toLowerCase().trim();
+      const articles = document.querySelectorAll('section:last-of-type article');
+  
+      articles.forEach(function(article) {
+        const titre = article.querySelector('h3')?.textContent.toLowerCase() || '';
+        const auteur = article.querySelector('.text-gray-500')?.textContent.toLowerCase() || '';
+        const tags = Array.from(article.querySelectorAll('.bg-red-100'))
+          .map(tag => tag.textContent.toLowerCase())
+          .join(' ');
+        
+        const match = titre.includes(value) || auteur.includes(value) || tags.includes(value);
+        article.style.display = (match || value === '') ? '' : 'none';
+      });
+    };
+}
+
+// ==========================================
+// VOTRE TRAVAIL: ACTIONS (PIN, STAR, MODALS)
+// ==========================================
+function togglePin(button) {
+    const isPinned = button.classList.contains('pinned');
+    
+    if (isPinned) {
+      button.classList.remove('pinned');
+      button.style.filter = 'grayscale(50%)';
+      button.title = 'Épingler';
+    } else {
+      button.classList.add('pinned');
+      button.style.filter = 'grayscale(0%) brightness(1.5) drop-shadow(0 0 8px rgba(197, 23, 24, 0.5))';
+      button.title = 'Désépingler';
+    }
+    
+    // Animation
+    button.style.transform = 'scale(1.3) rotate(15deg)';
+    setTimeout(() => {
+      button.style.transform = 'scale(1) rotate(0deg)';
+    }, 200);
+}
+  
+function toggleStar(button) {
+    const article = button.closest('article');
+    const voteCount = article.querySelector('.vote-count');
+    const isStarred = button.classList.contains('starred');
+    
+    if (isStarred) {
+      button.classList.remove('starred');
+      button.textContent = '⭐';
+      button.style.filter = 'grayscale(100%)';
+      button.title = 'Ajouter aux favoris';
+      
+      // Décrémenter le vote
+      let count = parseInt(voteCount.textContent);
+      voteCount.textContent = count - 1;
+    } else {
+      button.classList.add('starred');
+      button.textContent = '⭐';
+      button.style.filter = 'grayscale(0%)';
+      button.title = 'Retirer des favoris';
+      
+      // Incrémenter le vote
+      let count = parseInt(voteCount.textContent);
+      voteCount.textContent = count + 1;
+    }
+    
+    // Animation
+    button.style.transform = 'scale(1.3)';
+    setTimeout(() => {
+      button.style.transform = 'scale(1)';
+    }, 200);
+}
+  
+function initVideoModal() {
+    // Créer la modal si elle n'existe pas
+    if (!document.getElementById('video-modal')) {
+      const modalHTML = `
+        <div id="video-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 99999; align-items: center; justify-content: center;">
+          <div style="position: relative; width: 90%; max-width: 900px;">
+            <button onclick="closeVideo()" style="position: absolute; top: -40px; right: 0; background: none; border: none; color: white; font-size: 32px; cursor: pointer;">✕</button>
+            <iframe id="video-iframe" width="100%" height="500" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+}
+  
+function playVideo(url) {
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('video-iframe');
+    
+    if (modal && iframe) {
+      iframe.src = url + '?autoplay=1';
+      modal.style.display = 'flex';
+    }
+}
+  
+function closeVideo() {
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('video-iframe');
+    
+    if (modal && iframe) {
+      iframe.src = '';
+      modal.style.display = 'none';
+    }
+}
+
+// ==========================================
+// VOTRE TRAVAIL: STATISTIQUES & UPLOAD
+// ==========================================
+function showSymfonyStats() {
+    const statsHTML = `
+      <div id="stats-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99999; display: flex; align-items: center; justify-content: center;">
+        <div style="background: white; border-radius: 16px; max-width: 600px; width: 90%; padding: 32px; position: relative;">
+          <button onclick="closeStats()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: #6b7280;">&times;</button>
+          
+          <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 24px; color: #111827;">Statistiques des problèmes Symfony</h2>
+          
+          <div style="space-y: 16px;">
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">Erreur connexion BDD</span>
+                <span style="font-size: 14px; font-weight: 600; color: #C51718;">35%</span>
+              </div>
+              <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="width: 35%; background: #C51718; height: 100%;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">Erreur 500 serveur</span>
+                <span style="font-size: 14px; font-weight: 600; color: #C51718;">28%</span>
+              </div>
+              <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="width: 28%; background: #C51718; height: 100%;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">Problème migration Doctrine</span>
+                <span style="font-size: 14px; font-weight: 600; color: #C51718;">22%</span>
+              </div>
+              <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="width: 22%; background: #C51718; height: 100%;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">Erreur routing</span>
+                <span style="font-size: 14px; font-weight: 600; color: #C51718;">15%</span>
+              </div>
+              <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="width: 15%; background: #C51718; height: 100%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', statsHTML);
+}
+
+function showJavafxStats() {
+    const statsHTML = `
+      <div id="stats-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99999; display: flex; align-items: center; justify-content: center;">
+        <div style="background: white; border-radius: 16px; max-width: 600px; width: 90%; padding: 32px; position: relative;">
+          <button onclick="closeStats()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: #6b7280;">&times;</button>
+          
+          <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 24px; color: #111827;">Statistiques des problèmes JavaFX</h2>
+          
+          <div style="space-y: 16px;">
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">Erreur FXML / contrôleur</span>
+                <span style="font-size: 14px; font-weight: 600; color: #C51718;">38%</span>
+              </div>
+              <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="width: 38%; background: #C51718; height: 100%;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">module-info / modules manquants</span>
+                <span style="font-size: 14px; font-weight: 600; color: #C51718;">27%</span>
+              </div>
+              <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="width: 27%; background: #C51718; height: 100%;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">Paramètres JVM / lancement</span>
+                <span style="font-size: 14px; font-weight: 600; color: #C51718;">22%</span>
+              </div>
+              <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="width: 22%; background: #C51718; height: 100%;"></div>
+              </div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">Connexion BDD (JDBC)</span>
+                <span style="font-size: 14px; font-weight: 600; color: #C51718;">13%</span>
+              </div>
+              <div style="width: 100%; background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="width: 13%; background: #C51718; height: 100%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', statsHTML);
+}
+  
+function closeStats() {
+    const modal = document.getElementById('stats-modal');
+    if (modal) modal.remove();
+}
+
+function handleFileUpload(event) {
+    const files = event.target.files;
+    const fileList = document.getElementById('file-list');
+    
+    if (!fileList) return;
+    
+    fileList.innerHTML = '';
+    
+    Array.from(files).forEach(file => {
+      const fileItem = document.createElement('div');
+      fileItem.className = 'flex items-center justify-between bg-gray-100 px-4 py-2 rounded-lg';
+      fileItem.innerHTML = `
+        <span class="text-sm font-redhat">${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+        <button onclick="this.parentElement.remove()" class="text-red-600 hover:text-red-700">✕</button>
+      `;
+      fileList.appendChild(fileItem);
+    });
+}
+  
+function openQuestionForm() {
+    alert('Formulaire de question à développer : titre, description, fichiers attachés');
+}
