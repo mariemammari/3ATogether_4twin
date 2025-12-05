@@ -1,0 +1,443 @@
+<style>
+    .space-y-6>:not([hidden])~:not([hidden]) {
+        --tw-space-y-reverse: 0;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+</style>
+
+
+<div class="flex flex-col ">
+
+    <!--pub section-->
+    <div class="bg-white rounded-xl px-4 pt-1 mb-1  ">
+        <!-- Post header: profile, follow, actions -->
+        <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gray-300 rounded-full">
+                    <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                        class="w-full h-full object-cover rounded-full">
+                </div>
+                <div>
+                    <h4 class="font-semibold">Kamel Touati</h4>
+                    <p class="text-xs text-gray-500">2 hours ago</p>
+                </div>
+                <button
+                    class="flex items-center gap-2 px-3 py-1 text-white text-sm rounded-full bg-brand-red hover:bg-brand-darkRed transition-colors">
+                    <img src="/src/assets/icons/add_friend.png" alt="Add friend" class="w-4 h-4">
+                    Suivre
+                </button>
+            </div>
+            <div class="flex-colitems-center gap-2">
+
+                <span  class="text-2xl">•••</span>
+
+
+              <a href="javascript:void(0)" onclick="loadPage('ai-summary')"> <div  class="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                    <img src="/src/assets/icons/ai.png" alt="AI Icon" class="w-6 h-6">
+                </div>
+            </a> 
+
+            </div>
+        </div>
+
+        <!-- Post body: text + image -->
+        <div class="flex gap-4 mb-3">
+            <div class="flex-1">
+                <h1 class="text-black font-redhat text-2xl mb-1">JavaFX can’t connect to MySQL database — “No suitable
+                    driver found” error</h1>
+                <p class="text-black font-poppins line-clamp-3">
+                    This error keeps popping whenever I try to run. Would you please try to help me? I'm running out
+                    of time!This error keeps popping whenever I try to<br> run. Would you please try to help me? I'm
+                    running
+                    out
+                    of time!
+                    This error keeps popping whenever <br>I try to run. Would you please try to help me? I'm running out
+                    of time!
+                    This error keeps popping whenever I try to run. Would you <br>please try to help me? I'm running out
+                    of time!
+                    his error keeps popping whenever I<br> try to run. Would you please try to help me? I'm running out
+                    of time!
+                    This error keeps popping whenever <br>I try to run. Would you <br>please try to help me? I'm running
+                    out
+                    of time!
+
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Post footer: interactions + tag -->
+        <div class="flex items-center justify-between">
+            <div class="flex gap-2 text-sm ">
+                <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                    <button class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                        <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                    </button>
+                    15
+                    <button class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                        <img src="/src/assets/icons/downvote.png" alt="Downvote" class="w-4 h-4">
+                    </button>
+                </div>
+                <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                    <button class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                        <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                    </button>
+                    7
+                </div>
+                <div class="bg-gray-200 flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                    <button class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                        <img src="/src/assets/icons/repost_red.png" alt="Repost" class="w-4 h-4">
+                    </button>
+                    2
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <img src="/src/assets/icons/tags.png" alt="Tag Icon" class="w-4 h-4 inline-block ml-1"></i>
+
+                <span class="text-lg  px-2 py-1 rounded-full text-red-500 bg-red-100">#JavaFx
+                </span>
+            </div>
+        </div>
+
+
+    </div>
+    <hr class="border-gray-300  space-y-3 ">
+
+    <div class="h-80 overflow-y-auto ">
+
+        <!-- comment section-->
+        <div class="bg-white rounded-xl px-4 mt-1 mb-1">
+
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+
+
+
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">hana fkiri</h4>
+                        <p class="text-xs text-gray-500">3 hours ago</p>
+                    </div>
+
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 text-gray-700 rounded-full flex items-center justify-center bg-white 
+                         border border-green-700 hover:border-green-500 transition-colors">
+                        <img src="/src/assets/icons/tick.png" alt="AI Icon" class="w-4 h-4">
+                    </div>
+                    <button
+                        class="w-7 h-7 bg-brand-red rounded-full flex items-center justify-center hover:border-brand-red/50 transition-colors">
+                        <img src="/src/assets/icons/save.png" alt="More" class="w-5 h-5">
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- comment body: text .. -->
+            <div class="flex gap-4 mb-3">
+                <div class="flex-1">
+
+
+
+
+
+                    <p class="text-black font-poppins line-clamp-3">
+                        Did you also add the connector to your module path, not just classpath?
+
+                    </p>
+
+                </div>
+
+                <div class="flex gap-2 text-sm ">
+                    <div class=" flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/fleche-vers-le-bas.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+
+
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+            <hr class="border-gray-300 my-2 mt-4">
+
+        </div>
+        <!--comment2-->
+        <div class="bg-white rounded-xl px-4 mt-1 mb-1">
+
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">oussema benjmia</h4>
+                        <p class="text-xs text-gray-500">3 hours ago</p>
+                    </div>
+
+
+
+
+                </div>
+
+                <div class=" flex w-6 h-6 text-gray-700 rounded-full items-center justify-center bg-white
+                         border border-red-600 -700 hover:border-green-500 transition-colors ">
+                    <img src="/src/assets/icons/edit_red.png" alt="AI Icon" class="w-4 h-4">
+
+
+                </div>
+
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-3">
+                <div class="flex-1">
+                    <p class="text-black font-poppins line-clamp-3">
+                        Did you also add the connector to your module path, not just classpath?
+
+                    </p>
+                </div>
+
+
+                <div class="flex gap-2 text-sm ">
+                    <div class=" flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/fleche-vers-le-bas.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+
+
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+            <hr class="border-gray-300 my-2 mt-4">
+
+
+
+        </div>
+        <!--comment3-->
+        <div class="bg-white rounded-xl px-4 mt-1 mb-1">
+
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Meriem ammari</h4>
+                        <p class="text-xs text-gray-500">3 hours ago</p>
+                    </div>
+
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 text-gray-700 rounded-full flex items-center justify-center bg-green-500
+                         border border-green-700 hover:border-green-500 transition-colors">
+                        <img src="/src/assets/icons/arrow_down_white.png" alt="AI Icon" class="w-4 h-4">
+                    </div>
+                    <button
+                        class="w-7 h-7 bg-brand-red rounded-full flex items-center justify-center hover:border-brand-red/50 transition-colors">
+                        <img src="/src/assets/icons/save.png" alt="More" class="w-5 h-5">
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-1">
+                <div class="flex-1">
+                    <p class="text-black font-poppins line-clamp-3">
+                        Did you also add the connector to your module path, not just classpath? The comment here is just
+                        whatever just to be a fake comment <br>as a place holder this app is an app for esprit school
+                        Did
+                        you
+                        also add the connector to your module path, not just classpath?
+                    </p>
+                </div>
+
+                <div class="flex gap-2 text-sm ">
+                    <div class=" flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/fleche-vers-le-bas.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+
+
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- Post footer: interactions + tag -->
+
+
+            <hr class="border-gray-300 my-2 mt-4">
+
+        </div>
+
+        <!--comment4-->
+        <div class="bg-white rounded-xl px-4 mt-1 mb-1">
+
+            <!-- Post header: profile, follow, actions -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-300 rounded-full">
+                        <img src="/src/assets/icons/profile_img.png" alt="Youssef"
+                            class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Youssef Ammari</h4>
+                        <p class="text-xs text-gray-500">3 hours ago</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Post body: text + image -->
+            <div class="flex gap-4 mb-1">
+                <div class="flex-1">
+                    <p class="text-black font-poppins line-clamp-3">
+                        Did you also add the connector to your module path, not just classpath?
+
+                    </p>
+                </div>
+
+
+                <div class="flex gap-2 text-sm ">
+                    <div class=" flex items-center gap-1 rounded-full px-2 py-1 text-black">
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/Upvote.png" alt="Upvote" class="w-4 h-4">
+                        </button>
+                        15
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/fleche-vers-le-bas.png" alt="Downvote" class="w-4 h-4">
+                        </button>
+
+
+                        <button
+                            class="hover:text-brand-red transform hover:scale-125 transition-transform duration-200">
+                            <img src="/src/assets/icons/comment.png" alt="Comment" class="w-4 h-4">
+                        </button>
+                        7
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- Post footer: interactions + tag -->
+
+
+            <hr class="border-gray-300 my-2 mt-4">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- barre ecrire-->
+    <div
+        class="flex w-90 h-10 bg-white rounded-full border border-red-500 items-center pr-0.5 pl-4 mr-4  mt-8  mb-0  shadow-lg">
+        <button class="flex items-center gap-4 mr-5">
+            <img src="/src/assets/icons/comment.png" class="w-5 h-5" alt="Comment Icon">
+
+        </button>
+
+        <input type="text" placeholder="Ecrivez un commentaire..."
+            class="flex-1 h-full bg-transparent outline-none text-gray-700 text-sm mr-2">
+
+        <!-- les boutons envoie upload..-->
+        <div class="  flex items-center gap-1  ">
+
+
+            <button class=" flex items-center justify-center">
+                <img src="/src/assets/icons/emoji.png" class="w-8 h-8" alt="Send Icon">
+
+            </button>
+
+
+
+            <button class=" flex items-center justify-center">
+                <img src="/src/assets/icons/upload.png" class="w-7 h-7" alt="Send Icon">
+
+            </button>
+
+
+            <button class="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center">
+                <img src="/src/assets/icons/envoyer.png" class="w-6 h-6" alt="Send Icon">
+
+            </button>
+
+
+
+
+        </div>
+
+    </div>
+
+</div>

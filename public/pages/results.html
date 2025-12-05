@@ -1,0 +1,113 @@
+<!-- HEADER -->
+<header class="h-24 bg-white px-6 flex items-center justify-between sticky top-0 z-10 border-b">
+  <button onclick="loadPage('fqa')" class="text-2xl text-gray-600 hover:text-brand-red">‹</button>
+  
+  <div class="text-center flex-1">
+    <h1 class="text-xl font-bold font-poppins text-brand-black">Résultats de recherche</h1>
+    <p class="text-sm text-gray-600 font-redhat">2 solutions trouvées</p>
+  </div>
+  
+  <button class="text-2xl text-gray-400">›</button>
+</header>
+
+<!-- CONTENU PRINCIPAL -->
+<div class="flex flex-1 overflow-hidden relative">
+  <main class="flex-1 overflow-y-auto p-6 bg-gray-50 space-y-6 pb-32">
+
+    <!-- BARRE DE RECHERCHE PAR FILTRE -->
+    <section class="space-y-3">
+      <div class="relative bg-white rounded-full shadow-md border border-gray-200 px-4 py-2 flex items-center gap-3">
+        <svg class="h-5 w-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          type="text"
+          placeholder="Recherche par filtre"
+          class="flex-1 text-sm outline-none font-redhat"
+        />
+      </div>
+      
+      <!-- FILTRES ACTIFS -->
+      <div>
+        <p class="text-sm font-semibold text-gray-700 mb-2">Filtres actifs</p>
+        <div class="flex flex-wrap gap-2">
+          <button class="flex items-center gap-1 px-3 py-1 rounded-full bg-gray-200 text-xs font-redhat hover:bg-gray-300">
+            <span class="w-4 h-4 bg-gray-500 rounded-full flex items-center justify-center text-white text-xs">✕</span>
+            Config XAMPP
+          </button>
+          <button class="flex items-center gap-1 px-3 py-1 rounded-full bg-gray-200 text-xs font-redhat hover:bg-gray-300">
+            <span class="w-4 h-4 bg-gray-500 rounded-full flex items-center justify-center text-white text-xs">✕</span>
+            Debug Symfony
+          </button>
+          <button class="flex items-center gap-1 px-3 py-1 rounded-full bg-gray-200 text-xs font-redhat hover:bg-gray-300">
+            <span class="w-4 h-4 bg-gray-500 rounded-full flex items-center justify-center text-white text-xs">✕</span>
+            Erreur 404
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SÉLECTIONNER UNE TECHNOLOGIE -->
+   
+<section>
+  <h2 class="text-lg font-semibold font-poppins text-brand-black mb-3">Sélectionnez une technologie</h2>
+  <div class="flex gap-3">
+    <button onclick="loadPage('symfony-resources')" class="px-6 py-2 border-2 border-gray-300 rounded-full text-sm font-redhat hover:bg-gray-100">
+      Voir tout Symfony
+    </button>
+    <button onclick="loadPage('javafx-resources')" class="px-6 py-2 border-2 border-gray-300 rounded-full text-sm font-redhat hover:bg-gray-100">
+      Voir tout JavaFx
+    </button>
+  </div>
+</section>
+
+
+    <!-- RÉSULTATS -->
+    <section class="space-y-4">
+      <h2 class="text-lg font-semibold font-poppins text-brand-black">Résultats</h2>
+      
+      <!-- Résultat 1 -->
+      <article class="bg-white rounded-2xl border p-4 flex items-start gap-4">
+        <div class="flex-1">
+          <h3 class="font-semibold font-poppins text-brand-black mb-1">JavaFX Application ne démarre pas après build</h3>
+          <div class="flex items-center gap-2 text-sm text-gray-500 font-redhat mb-2">
+            <span>Hayfa Khadraoui</span>
+            <span>•</span>
+            <span>Il y a 5 jours</span>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-3 py-0.5 rounded-full bg-red-100 text-red-700 text-xs font-redhat">JavaFX</span>
+            <span class="px-3 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-redhat">Build</span>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <button class="text-red-600 text-xl">📌</button>
+          <span class="text-sm font-semibold">15</span>
+          <button class="text-gray-400 text-xl">⭐</button>
+        </div>
+      </article>
+
+      <!-- Résultat 2 -->
+      <article class="bg-white rounded-2xl border p-4 flex items-start gap-4">
+        <div class="flex-1">
+          <h3 class="font-semibold font-poppins text-brand-black mb-1">Configuration XAMPP sur Windows 11</h3>
+          <div class="flex items-center gap-2 text-sm text-gray-500 font-redhat mb-2">
+            <span>Yosra Ben Ali</span>
+            <span>•</span>
+            <span>Il y a 1 semaine</span>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-3 py-0.5 rounded-full bg-red-100 text-red-700 text-xs font-redhat">XAMPP</span>
+            <span class="px-3 py-0.5 rounded-full bg-red-100 text-red-700 text-xs font-redhat">Config</span>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <button class="text-red-600 text-xl">📌</button>
+          <span class="text-sm font-semibold">31</span>
+          <button class="text-gray-400 text-xl">⭐</button>
+        </div>
+      </article>
+    </section>
+
+  </main>
+</div>
